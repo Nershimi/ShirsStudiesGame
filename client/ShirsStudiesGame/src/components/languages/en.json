@@ -1,0 +1,15 @@
+{
+    "signIn": {
+      "title": "Sign in",
+      "usernamePlaceholder": "Username",
+      "passwordPlaceholder": "Password",
+      "loginButton": "LOGIN",
+      "forgotPassword": "Forgot Password?",
+      "errorMessage": "Username or Password are not valid",
+      "showButton": {
+        "show": "Show",
+        "hide": "Hide"
+      }
+    }
+  }
+  

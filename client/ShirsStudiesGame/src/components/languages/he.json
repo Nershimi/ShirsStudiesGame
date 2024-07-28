@@ -1,0 +1,15 @@
+{
+    "signIn": {
+      "title": "התחבר",
+      "usernamePlaceholder": "שם משתמש",
+      "passwordPlaceholder": "סיסמה",
+      "loginButton": "התחברות",
+      "forgotPassword": "שכחת סיסמה?",
+      "errorMessage": "שם משתמש או סיסמה לא תקינים",
+      "showButton": {
+        "show": "הצג",
+        "hide": "הסתר"
+      }
+    }
+  }
+  
