@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaUser, FaLock } from "react-icons/fa"; // Importing icons
+import { FaUser, FaLock } from "react-icons/fa";
 import Input from "../Input.jsx";
 import Button from "../Button.jsx";
 import { handleSignIn } from "./handleSignIn.js";
 import { resetPassword } from "./handleResetPassword.js";
-import "./login.css"; // Import the CSS file
+import "./login.css";
 
 import { loadLanguage } from "./../../helpers/loadLanguage.js"; // Import the helper function
 
-export default function SignIn({ lang = "en" }) {
+export default function SignIn({ lang = "en", setLoggedIn }) {
   const [userFields, setUserFields] = useState({
     email: "",
     password: "",
@@ -21,7 +21,7 @@ export default function SignIn({ lang = "en" }) {
   const navigate = useNavigate();
 
   const navigateToHomepage = () => {
-    navigate("/Homepage");
+    navigate("/HomePage");
   };
 
   useEffect(() => {
@@ -37,14 +37,19 @@ export default function SignIn({ lang = "en" }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setErrorMessage(""); // Change: Clear any previous error message
     handleSignIn(userFields.email, userFields.password)
       .then(() => {
         console.log("navigate to home page");
+        setLoggedIn(true);
         navigateToHomepage();
       })
       .catch(() => {
+        console.error("Sign-in error:", error);
         if (texts && texts.errorMessage) {
           setErrorMessage(texts.errorMessage);
+        } else {
+          setErrorMessage("Login failed. Please try again."); // Change: Added general error message
         }
         window.scrollTo(0, 0);
       });

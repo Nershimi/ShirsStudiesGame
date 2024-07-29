@@ -9,7 +9,7 @@ import SignIn from "./components/login/Sign-In.jsx";
 import HomePage from "./components/homePage/HomePage.jsx";
 import Header from "./components/Header.jsx";
 import { isUserLogin } from "./isUserLogin.js";
-import "./index.css"
+import "./index.css";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,7 +29,7 @@ function App() {
 
   return (
     <Router>
-       <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Routes>
         <Route
           path="/HomePage"
@@ -37,7 +37,13 @@ function App() {
         />
         <Route
           path="/"
-          element={loggedIn ? <Navigate to="/HomePage" /> : <SignIn />}
+          element={
+            loggedIn ? (
+              <Navigate to="/HomePage" />
+            ) : (
+              <SignIn setLoggedIn={setLoggedIn} />
+            )
+          }
         />
       </Routes>
     </Router>
