@@ -47,12 +47,44 @@
   background-color: #0056b3;
 }
 
-p, h2 {
+p,
+h2 {
   text-align: right; /* מיישר את הטקסט בפסקאות ובכותרות לימין */
+}
+.dialog {
+  background-color: #f0f8ff; /* Light Alice Blue background for a friendly feel */
+  border: 2px solid #87ceeb; /* Light Sky Blue border for a cheerful touch */
+  border-radius: 10px; /* Rounded corners for a soft appearance */
+  padding: 20px; /* Padding inside the dialog */
+  width: 300px; /* Fixed width for consistency */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center; /* Center the text */
+  font-family: "Arial", sans-serif; /* Clean, readable font */
+}
+
+.dialog p {
+  font-size: 16px; /* Slightly larger text for readability */
+  color: #2e8b57; /* Sea Green text color for a positive, vibrant look */
+  margin-bottom: 20px; /* Space below the text */
+}
+
+.close-dialog-button {
+  background-color: #ff69b4; /* Hot Pink button background for a happy vibe */
+  color: white; /* White text for contrast */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners for the button */
+  padding: 10px 20px; /* Padding inside the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Font size for the button text */
+}
+
+.close-dialog-button:hover {
+  background-color: #ff1493; /* Darker Pink on hover for effect */
 }
 
 @media (max-width: 600px) {
-  .answer-button, .next-button {
+  .answer-button,
+  .next-button {
     padding: 10px;
     font-size: 14px;
   }

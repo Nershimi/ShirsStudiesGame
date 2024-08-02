@@ -1,0 +1,18 @@
+/* HomePage.module.css */
+.button {
+    background-color: #fff; /* White background */
+    color: #333; /* Dark text color for contrast */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for size */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    margin: 5px; /* Space between buttons */
+  }
+  
+  .button:hover {
+    background-color: #f0f0f0; /* Light grey on hover */
+    color: #000; /* Darker text color on hover */
+  }
+  

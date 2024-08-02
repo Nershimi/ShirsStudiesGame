@@ -20,12 +20,6 @@ exports.getQuestionsByTopic = functions.https.onRequest((req, res) => {
         return res.status(401).send("Unauthorized");
       }
 
-      // const decodedToken = await admin.auth().verifyIdToken(idToken);
-
-      // if (!decodedToken) {
-      //   return res.status(401).send("Unauthorized");
-      // }
-      
       const { topic } = req.body;
 
       if (!topic) {
@@ -33,15 +27,20 @@ exports.getQuestionsByTopic = functions.https.onRequest((req, res) => {
       }
 
       // Fetch all questions for the specified topic
-      const querySnapshot = await db.collection("questions").where("topic", "==", topic).get();
+      const querySnapshot = await db
+        .collection("questions")
+        .where("topic", "==", topic)
+        .get();
       const questions = [];
-      
+
       querySnapshot.forEach((doc) => {
         questions.push({ id: doc.id, ...doc.data() });
       });
 
       if (questions.length === 0) {
-        return res.status(404).send("No questions found for the specified topic");
+        return res
+          .status(404)
+          .send("No questions found for the specified topic");
       }
 
       // Randomly select 30 questions

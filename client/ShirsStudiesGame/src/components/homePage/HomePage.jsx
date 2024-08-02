@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "./HomePage.module.css"; // Import the CSS module
+import Button from "../Button";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -32,12 +34,18 @@ const HomePage = () => {
   return (
     <div>
       <h1>Choose a Topic</h1>
-      <button onClick={() => handleTopicClick("ביולוגיה מולקולרית")}>
-        Biochemistry
-      </button>
-      {/* <button onClick={() => handleTopicClick("Neurophysiology")}>
-        Neurophysiology
-      </button> */}
+      <Button
+        className={styles.button}
+        onClick={() => handleTopicClick("ביולוגיה מולקולרית")}
+      >
+        ביולוגיה מולקולרית
+      </Button>
+      <Button
+        className={styles.button}
+        onClick={() => handleTopicClick("אימונולוגיה")}
+      >
+        אימונולוגיה
+      </Button>
       {/* Add more buttons as needed */}
     </div>
   );
