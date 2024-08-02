@@ -35,9 +35,9 @@ const HomePage = () => {
       <button onClick={() => handleTopicClick("ביולוגיה מולקולרית")}>
         Biochemistry
       </button>
-      <button onClick={() => handleTopicClick("Neurophysiology")}>
+      {/* <button onClick={() => handleTopicClick("Neurophysiology")}>
         Neurophysiology
-      </button>
+      </button> */}
       {/* Add more buttons as needed */}
     </div>
   );

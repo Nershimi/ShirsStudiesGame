@@ -1,53 +1,63 @@
 .question-game {
-    text-align: center;
-    margin: 20px;
-    direction: rtl; /* מגדיר שהכיוון של הטקסט הוא מימין לשמאל */
+  text-align: center;
+  margin: 20px;
+  direction: rtl; /* מגדיר שהכיוון של הטקסט הוא מימין לשמאל */
+}
+
+.answer-button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  text-align: right; /* מיישר את הטקסט בתוך הכפתור לימין */
+}
+
+.answer-button:hover {
+  opacity: 0.8;
+}
+
+.answer-button.correct {
+  background-color: green;
+  color: white;
+}
+
+.answer-button.incorrect {
+  background-color: red;
+  color: white;
+}
+
+.next-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.next-button:hover {
+  background-color: #0056b3;
+}
+
+p, h2 {
+  text-align: right; /* מיישר את הטקסט בפסקאות ובכותרות לימין */
+}
+
+@media (max-width: 600px) {
+  .answer-button, .next-button {
+    padding: 10px;
+    font-size: 14px;
   }
-  
-  .answer-button {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 15px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-    text-align: right; /* מיישר את הטקסט בתוך הכפתור לימין */
+
+  .question-game {
+    margin: 10px;
   }
-  
-  .answer-button:hover {
-    opacity: 0.8;
-  }
-  
-  .answer-button.correct {
-    background-color: green;
-    color: white;
-  }
-  
-  .answer-button.incorrect {
-    background-color: red;
-    color: white;
-  }
-  
-  .next-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .next-button:hover {
-    background-color: #0056b3;
-  }
-  
-  p, h2 {
-    text-align: right; /* מיישר את הטקסט בפסקאות ובכותרות לימין */
-  }
-  
+}

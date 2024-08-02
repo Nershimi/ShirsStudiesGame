@@ -8,6 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Button";
+import "../login/login.css";
 
 export default function SignUp() {
   const [newUser, setNewUser] = useState({
@@ -17,8 +18,11 @@ export default function SignUp() {
     fullName: "",
   });
   const [secondPassword, setSecondPassword] = useState("");
-  const [showPass, setShowPass] = useState(false);
-  const [error, setError] = useState();
+  const [showPass, setShowPass] = useState({
+    password: false,
+    confirmPassword: false,
+  });
+  const [error, setError] = useState("");
   const [hasInteractedFullName, setHasInteractedFullName] = useState(false);
   const [hasInteractedDate, setHasInteractedDate] = useState(false);
   const navigate = useNavigate();
@@ -54,95 +58,114 @@ export default function SignUp() {
         throw new Error("Failed to save personal user details");
       }
     } catch (error) {
-      console.error("Error save personal user details: ", error);
+      console.error("Error saving personal user details: ", error);
       alert("Failed to save personal user details");
     }
   }
 
   const notEmptyFiled =
     newUser.dateOfBirth.length > 0 && newUser.fullName.length > 0;
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewUser((prevData) => ({
-      ...prevData,
-      [name]: value,
+
+  const handleChange = (key, value) => {
+    setNewUser({ ...newUser, [key]: value });
+  };
+
+  const handleSecondPasswordChange = (e) => setSecondPassword(e.target.value);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!emailValid || !passwordValid || !isEqualPassword || !notEmptyFiled) {
+      return setError("Please make sure all fields are correct");
+    }
+    setError("");
+    try {
+      const user = await handleSignUp(newUser, setError); // Pass setError here
+      await saveUserDetails(user.uid);
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const toggleShowPass = (field) => {
+    setShowPass((prevState) => ({
+      ...prevState,
+      [field]: !prevState[field],
     }));
   };
 
-  const navigateToSignIn = () => {
-    navigate("/");
-  };
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (emailValid && passwordValid && isEqualPassword && notEmptyFiled) {
-      handleSignUp(newUser, setError)
-        .then((user) => {
-          saveUserDetails(user.uid); // Pass user ID to saveUserDetails
-          navigateToSignIn();
-        })
-        .catch((error) => {
-          console.error("Sign up failed:", error);
-        });
-    } else {
-      setHasInteractedDate(true);
-    }
-  }
-
   return (
-    <div>
-      <div>
-        <h1></h1>
-        <form onSubmit={handleSubmit}>
-          <Input
-            type="email"
-            value={newUser.email}
-            onChange={handleChange}
-            name="email"
-            placeholder="Please enter your email"
-            error={
-              !emailValid && newUser.email.length > 0 && "This mail not Valid"
-            }
-          />
-          <Input
-            type={showPass ? "text" : "password"}
-            value={newUser.password}
-            name="password"
-            placeholder="Enter your password"
-            onChange={handleChange}
-            error={
-              !passwordValid &&
-              newUser.password.length > 0 &&
-              "This password not Valid"
-            }
-          />
-          <Input
-            type={showPass ? "text" : "password"}
-            value={secondPassword}
-            onChange={(event) => setSecondPassword(event.target.value)}
-            placeholder="Re-enter your password"
-            error={!isEqualPassword && "Password not match"}
-          />
-          <Input
-            type="text"
-            name="fullName"
-            value={newUser.fullName}
-            placeholder="Your full name"
-            onChange={handleChange}
-            error={
-              hasInteractedFullName &&
-              newUser.fullName.length <= 0 &&
-              "Missing name"
-            }
-          />
-          <Input
-            type="date"
-            name="dateOfBirth"
-            value={newUser.dateOfBirth}
-            onChange={handleChange}
-            error={hasInteractedDate && "Missing date of birth"}
-          />
-          <Button type="submit">Sign up</Button>
+    <div className="container">
+      <div className="form-container">
+        <h1 className="title">Sign Up</h1>
+        {error && <p className="error">{error}</p>}
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="input-container">
+            <Input
+              type="text"
+              className="input"
+              placeholder="Full Name"
+              value={newUser.fullName}
+              onChange={(e) => handleChange("fullName", e.target.value)}
+              onBlur={() => setHasInteractedFullName(true)}
+              hasInteracted={hasInteractedFullName}
+            />
+          </div>
+          <div className="input-container">
+            <Input
+              type="date"
+              className="input"
+              placeholder="Date of Birth"
+              value={newUser.dateOfBirth}
+              onChange={(e) => handleChange("dateOfBirth", e.target.value)}
+              onBlur={() => setHasInteractedDate(true)}
+              hasInteracted={hasInteractedDate}
+            />
+          </div>
+          <div className="input-container">
+            <Input
+              type="email"
+              className="input"
+              placeholder="Email"
+              value={newUser.email}
+              onChange={(e) => handleChange("email", e.target.value)}
+            />
+          </div>
+          <div className="input-container">
+            <Input
+              type={showPass.password ? "text" : "password"}
+              className="password-input"
+              placeholder="Password"
+              value={newUser.password}
+              onChange={(e) => handleChange("password", e.target.value)}
+            />
+            <button
+              type="button"
+              className="show-button"
+              onClick={() => toggleShowPass("password")}
+            >
+              {showPass.password ? "Hide" : "Show"}
+            </button>
+          </div>
+          <div className="input-container">
+            <Input
+              type={showPass.confirmPassword ? "text" : "password"}
+              className="password-input"
+              placeholder="Confirm Password"
+              value={secondPassword}
+              onChange={handleSecondPasswordChange}
+            />
+            <button
+              type="button"
+              className="show-button"
+              onClick={() => toggleShowPass("confirmPassword")}
+            >
+              {showPass.confirmPassword ? "Hide" : "Show"}
+            </button>
+          </div>
+          <Button className="button" type="submit">
+            Sign up
+          </Button>
         </form>
       </div>
     </div>
