@@ -44,7 +44,7 @@ export default function SignIn({ lang = "en", setLoggedIn }) {
         setLoggedIn(true);
         navigateToHomepage();
       })
-      .catch(() => {
+      .catch((error) => {
         console.error("Sign-in error:", error);
         if (texts && texts.errorMessage) {
           setErrorMessage(texts.errorMessage);
@@ -66,49 +66,51 @@ export default function SignIn({ lang = "en", setLoggedIn }) {
   }
 
   return (
-    <div className="container">
-      <div className="form-container">
-        <h1 className="title">{texts.title || "Loading..."}</h1>
-        <form onSubmit={handleSubmit} className="form">
-          {errorMessage && <div className="error">{errorMessage}</div>}
-          <div className="input-container">
-            <FaUser className="icon" />
-            <Input
-              type="email"
-              name="email"
-              value={userFields.email}
-              placeholder={texts.usernamePlaceholder || "Loading..."}
-              onChange={handleChange}
-              className="input"
-            />
-          </div>
-          <div className="input-container">
-            <FaLock className="icon" />
-            <Input
-              type={showPass ? "text" : "password"}
-              placeholder={texts.passwordPlaceholder || "Loading..."}
-              name="password"
-              value={userFields.password}
-              onChange={handleChange}
-              className="input password-input"
-            />
-            <Button
-              type="button"
-              onClick={() => setShowPass(!showPass)}
-              className="show-button"
-            >
-              {showPass
-                ? texts.showButton?.hide || "Hide"
-                : texts.showButton?.show || "Show"}
+    <div className="login-component">
+      <div className="login-container">
+        <div className="form-container">
+          <h1 className="title">{texts.title || "Loading..."}</h1>
+          <form onSubmit={handleSubmit} className="form">
+            {errorMessage && <div className="error">{errorMessage}</div>}
+            <div className="input-container">
+              <FaUser className="icon" />
+              <Input
+                type="email"
+                name="email"
+                value={userFields.email}
+                placeholder={texts.usernamePlaceholder || "Loading..."}
+                onChange={handleChange}
+                className="input"
+              />
+            </div>
+            <div className="input-container">
+              <FaLock className="icon" />
+              <Input
+                type={showPass ? "text" : "password"}
+                placeholder={texts.passwordPlaceholder || "Loading..."}
+                name="password"
+                value={userFields.password}
+                onChange={handleChange}
+                className="input password-input"
+              />
+              <Button
+                type="button"
+                onClick={() => setShowPass(!showPass)}
+                className="show-button"
+              >
+                {showPass
+                  ? texts.showButton?.hide || "Hide"
+                  : texts.showButton?.show || "Show"}
+              </Button>
+            </div>
+            <Button type="submit" className="button">
+              {texts.loginButton || "Loading..."}
             </Button>
-          </div>
-          <Button type="submit" className="button">
-            {texts.loginButton || "Loading..."}
-          </Button>
-          <p className="forgot-password" onClick={handleResetPassword}>
-            {texts.forgotPassword || "Loading..."}
-          </p>
-        </form>
+            <p className="forgot-password" onClick={handleResetPassword}>
+              {texts.forgotPassword || "Loading..."}
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   );

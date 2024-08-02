@@ -14,7 +14,7 @@ const QuestionGame = () => {
   const [questionsAnswered, setQuestionsAnswered] = useState(0);
   const [showDialog, setShowDialog] = useState(false);
   const [questionAnswered, setQuestionAnswered] = useState(false);
-  const [correctAnswerSelected, setCorrectAnswerSelected] = useState(false); // Track if correct answer has been selected
+  const [correctAnswerSelected, setCorrectAnswerSelected] = useState(false);
   const navigate = useNavigate();
 
   const navigateToHomePage = () => {
@@ -31,8 +31,8 @@ const QuestionGame = () => {
         ...currentQuestion.wrongAnswers,
       ];
       setShuffledAnswers(allAnswers.sort(() => Math.random() - 0.5));
-      setQuestionAnswered(false); // Reset question answered status
-      setCorrectAnswerSelected(false); // Reset correct answer selected status
+      setQuestionAnswered(false);
+      setCorrectAnswerSelected(false);
     }
   }, [currentIndex, questions, questionsAnswered]);
 
@@ -40,14 +40,14 @@ const QuestionGame = () => {
     if (!questionAnswered) {
       if (answer === questions[currentIndex].correctAnswer) {
         if (!correctAnswerSelected) {
-          setMessage("נכון!");
+          setMessage("כל הכבוד, תשובה נכונה!");
           setCorrectAnswersCount((prev) => prev + 1);
-          setCorrectAnswerSelected(true); // Mark correct answer as selected
+          setCorrectAnswerSelected(true);
         }
       } else {
-        setMessage("לא נכון!");
+        setMessage("תשובה לא נכונה, לא נורא תצליח בפעם הבאה");
       }
-      setSelectedAnswer(answer); // Update selected answer for visual feedback
+      setSelectedAnswer(answer);
     }
   };
 
@@ -57,15 +57,13 @@ const QuestionGame = () => {
       setSelectedAnswer(null);
       setCurrentIndex((prevIndex) => (prevIndex + 1) % questions.length);
       setQuestionsAnswered((prev) => prev + 1);
-      setQuestionAnswered(true); // Mark the question as answered
+      setQuestionAnswered(true);
     }
   };
 
   const handleCloseDialog = () => {
     setShowDialog(false);
     navigateToHomePage();
-
-    // Optionally, you can reset the game or redirect to another page here
   };
 
   if (questions.length === 0) return <p>אין שאלות להציג</p>;
@@ -73,44 +71,50 @@ const QuestionGame = () => {
   const currentQuestion = questions[currentIndex];
 
   return (
-    <div className="question-game">
-      {showDialog ? (
-        <div className="dialog">
-          <p>כל הכבוד הצלחת להגיע ל: {correctAnswersCount} תשובות נכונות.</p>
-          <Button onClick={handleCloseDialog} className="close-dialog-button">
-            Close
-          </Button>
-        </div>
-      ) : (
-        <>
-          <Button onClick={navigateToHomePage} className="next-button">
-            מסך הבית
-          </Button>
-          <h3>שאלה {currentIndex + 1} מתוך 30</h3>
-          <h2>{currentQuestion.question}</h2>
-          <div>
-            {shuffledAnswers.map((answer, index) => (
-              <Button
-                key={index}
-                onClick={() => handleAnswer(answer)}
-                className={`answer-button ${
-                  selectedAnswer === answer
-                    ? answer === currentQuestion.correctAnswer
-                      ? "correct"
-                      : "incorrect"
-                    : ""
-                }`}
-              >
-                {answer}
-              </Button>
-            ))}
+    <div className="game-container">
+      <div className="question-game">
+        {showDialog ? (
+          <div className="dialog">
+            <p>כל הכבוד הצלחת להגיע ל: {correctAnswersCount} תשובות נכונות.</p>
+            <Button onClick={handleCloseDialog} className="close-dialog-button">
+              Close
+            </Button>
           </div>
-          {message && <p>{message}</p>}
-          <Button onClick={handleNextQuestion} className="next-button">
-            המשך
-          </Button>
-        </>
-      )}
+        ) : (
+          <>
+            <Button onClick={navigateToHomePage} className="next-button">
+              מסך הבית
+            </Button>
+            <h3>שאלה {currentIndex + 1} מתוך 30</h3>
+            <h2>{currentQuestion.question}</h2>
+            <div>
+              {shuffledAnswers.map((answer, index) => (
+                <Button
+                  key={index}
+                  onClick={() => handleAnswer(answer)}
+                  className={`answer-button ${
+                    selectedAnswer === answer
+                      ? answer === currentQuestion.correctAnswer
+                        ? "correct"
+                        : "incorrect"
+                      : ""
+                  }`}
+                >
+                  {answer}
+                </Button>
+              ))}
+            </div>
+            {message && <p>{message}</p>}
+            <Button
+              onClick={handleNextQuestion}
+              className="next-button"
+              disabled={!questionAnswered} // Disable button until question is answered
+            >
+              המשך
+            </Button>
+          </>
+        )}
+      </div>
     </div>
   );
 };

@@ -35,44 +35,46 @@ export default function Header({ loggedIn, setLoggedIn }) {
   }
 
   return (
-    <header id="header">
-      <div className="left-content">
-        {/* <img src={logo} alt="Logo of website" /> */}
-        <h1>ShirsStudiesGame</h1>
-      </div>
-      <div className="right-content">
-        {!loggedIn ? (
-          <div>
-            <Button
-              type="button"
-              onClick={navigateToSignUp}
-              className="button-17"
-              role="button"
-            >
-              Sign up
-            </Button>
-            <Button
-              type="button"
-              onClick={navigateToSignIn}
-              className="button-17"
-              role="button"
-            >
-              Sign in
-            </Button>
-          </div>
-        ) : (
-          <div>
-            <Button
-              type="button"
-              onClick={handleSignOut}
-              className="button-17"
-              role="button"
-            >
-              Sign out
-            </Button>
-          </div>
-        )}
-      </div>
-    </header>
+    <div className="header-component">
+      <header id="header">
+        <div className="left-content">
+          {/* <img src={logo} alt="Logo of website" /> */}
+          <h1>ShirsStudiesGame</h1>
+        </div>
+        <div className="right-content">
+          {!loggedIn ? (
+            <div>
+              <Button
+                type="button"
+                onClick={navigateToSignUp}
+                className="button-17"
+                role="button"
+              >
+                Sign up
+              </Button>
+              <Button
+                type="button"
+                onClick={navigateToSignIn}
+                className="button-17"
+                role="button"
+              >
+                Sign in
+              </Button>
+            </div>
+          ) : (
+            <div>
+              <Button
+                type="button"
+                onClick={handleSignOut}
+                className="button-17"
+                role="button"
+              >
+                Sign out
+              </Button>
+            </div>
+          )}
+        </div>
+      </header>
+    </div>
   );
 }

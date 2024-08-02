@@ -1,69 +1,82 @@
-.container {
+.login-component .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
+  height: 100%;
+  max-height: 500px;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 2rem; /* Adjust margin as needed */
+  margin-top: 2rem;
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.form-container {
+.login-component .form-container {
   width: 100%;
 }
 
-.title {
+.login-component .title {
   font-size: 2.5rem;
   margin-bottom: 1rem;
   text-align: center;
 }
 
-.form {
+.login-component .form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
-.input-container {
+.login-component .input-container {
   display: flex;
   align-items: center;
   width: 100%;
   margin-bottom: 1rem;
   background: #fff;
   border-radius: 25px;
-  padding: 1rem;
+  padding: 0 1rem;
   border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
-.icon {
+.login-component .icon {
   margin-right: 0.5rem;
   color: #6a11cb;
-  font-size: 1.5rem; /* Increased icon size */
+  font-size: 1.5rem;
 }
 
-.input, .password-input {
+.login-component .input,
+.login-component .password-input {
   flex: 1;
-  border: none;
+  border: 1px solid rgb(195, 191, 191);
   outline: none;
-  padding: 0.75rem; /* Increased padding for larger input fields */
+  padding: 0.75rem 1rem;
   border-radius: 25px;
-  font-size: 1rem; /* Increased font size */
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 
-.show-button {
+.login-component .show-button {
   padding: 0.5rem;
   border-radius: 5px;
   border: none;
   background-color: #007bff;
   color: #fff;
   cursor: pointer;
+  margin-left: 0.5rem;
+  margin-right: -1rem;
 }
 
-.button {
+.login-component .button {
   padding: 0.75rem 1.5rem;
   border-radius: 25px;
   border: none;
@@ -77,38 +90,77 @@
   transition: background-color 0.3s;
 }
 
-.button:hover {
+.login-component .button:hover {
   background-color: #5a0cb5;
 }
 
-.forgot-password {
+.login-component .forgot-password {
   margin-top: 1rem;
   color: #fff;
   text-decoration: underline;
   cursor: pointer;
 }
 
-.error {
+.login-component .error {
   color: red;
   margin-bottom: 1rem;
 }
 
 @media (max-width: 600px) {
-  .container {
+  .login-component .login-container {
     padding: 10px;
     margin-top: 1rem;
   }
 
-  .title {
+  .login-component .title {
     font-size: 2rem;
   }
 
-  .input-container {
+  .login-component .input-container {
     padding: 0.5rem;
   }
 
-  .button {
+  .login-component .button {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-component .login-container {
+    padding: 10px;
+    margin-top: 1rem;
+  }
+
+  .login-component .title {
+    font-size: 2rem;
+  }
+
+  .login-component .input-container {
+    padding: 0.5rem;
+  }
+
+  .login-component .button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .login-component .login-container {
+    padding: 15px;
+  }
+
+  .login-component .title {
+    font-size: 2.2rem;
+  }
+
+  .login-component .input-container {
+    padding: 0.75rem;
+  }
+
+  .login-component .button {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
   }
 }

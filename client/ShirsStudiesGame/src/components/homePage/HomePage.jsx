@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./HomePage.module.css"; // Import the CSS module
+import styles from "./HomePage.module.css"; // Import the CSS module as an object
 import Button from "../Button";
 
 const HomePage = () => {
@@ -35,13 +35,13 @@ const HomePage = () => {
     <div>
       <h1>Choose a Topic</h1>
       <Button
-        className={styles.button}
+        className={styles["home-button"]} // Use the CSS module class
         onClick={() => handleTopicClick("ביולוגיה מולקולרית")}
       >
         ביולוגיה מולקולרית
       </Button>
       <Button
-        className={styles.button}
+        className={styles["home-button"]} // Use the CSS module class
         onClick={() => handleTopicClick("אימונולוגיה")}
       >
         אימונולוגיה
