@@ -6,9 +6,11 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SignIn from "./components/login/Sign-In.jsx";
+import SignUp from "./components/SignUp/SignUp.jsx";
 import HomePage from "./components/homePage/HomePage.jsx";
 import Header from "./components/Header.jsx";
 import { isUserLogin } from "./isUserLogin.js";
+import QuestionGame from "./components/game/GameComponent.jsx";
 import "./index.css";
 
 function App() {
@@ -45,6 +47,8 @@ function App() {
             )
           }
         />
+        <Route path="sign-up" element={<SignUp />} />
+        <Route path="/game" element={<QuestionGame/>} />
       </Routes>
     </Router>
   );
