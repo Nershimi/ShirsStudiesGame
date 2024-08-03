@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Varela Round", sans-serif;
+  font-style: normal;
   background: linear-gradient(to bottom, #6a11cb, #2575fc);
   color: #ffffff;
   min-height: 100vh;
@@ -29,11 +32,6 @@ body {
   .App {
     width: 100%;
   }
-
-  /* .header-container,
-  .signin-container {
-    padding: 10px;
-  } */
 }
 
 @media (max-width: 768px) {

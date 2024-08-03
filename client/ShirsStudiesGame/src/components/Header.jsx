@@ -39,7 +39,7 @@ export default function Header({ loggedIn, setLoggedIn }) {
       <header id="header">
         <div className="left-content">
           {/* <img src={logo} alt="Logo of website" /> */}
-          <h1>ShirsStudiesGame</h1>
+          <h1>Shirs Studies Game</h1>
         </div>
         <div className="right-content">
           {!loggedIn ? (
