@@ -5,6 +5,9 @@ import "./header.css"; // Import the new CSS file
 import { isUserLogin } from "./../isUserLogin.js";
 import { signOutUser } from "./../signOutUser.js";
 
+// TODO: add logo
+
+
 export default function Header({ loggedIn, setLoggedIn }) {
   const navigate = useNavigate();
 

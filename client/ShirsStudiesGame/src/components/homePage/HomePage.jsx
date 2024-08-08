@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css"; // Import the CSS module as an object
 import Button from "../Button";
 
+// TODO: Loader
+
 const HomePage = () => {
   const navigate = useNavigate();
 
@@ -45,6 +47,18 @@ const HomePage = () => {
         onClick={() => handleTopicClick("אימונולוגיה")}
       >
         אימונולוגיה
+      </Button>
+      <Button
+        className={styles["home-button"]} // Use the CSS module class
+        onClick={() => handleTopicClick("פזיולוגיה ב")}
+      >
+        פזיולוגיה ב
+      </Button>
+      <Button
+        className={styles["home-button"]} // Use the CSS module class
+        onClick={() => handleTopicClick("מבוא למיקרוביולוגיה")}
+      >
+        מבוא למיקרוביולוגיה
       </Button>
       {/* Add more buttons as needed */}
     </div>

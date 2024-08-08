@@ -44,10 +44,10 @@ exports.getQuestionsByTopic = functions.https.onRequest((req, res) => {
       }
 
       // Randomly select 30 questions
-      const shuffledQuestions = questions.sort(() => 0.5 - Math.random());
-      const selectedQuestions = shuffledQuestions.slice(0, 30);
+      // const shuffledQuestions = questions.sort(() => 0.5 - Math.random());
+      // const selectedQuestions = shuffledQuestions.slice(0, 30);
 
-      res.status(200).json(selectedQuestions);
+      res.status(200).json(questions);
     } catch (error) {
       console.error("Error fetching questions: ", error);
       res.status(500).send("Error fetching questions");
