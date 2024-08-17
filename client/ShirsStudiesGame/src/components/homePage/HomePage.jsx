@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./HomePage.module.css"; // Import the CSS module as an object
-import Button from "../Button";
+import styles from "./HomePage.module.css";
+import Loader from "../loader/Loader.jsx";
+import Button from "../Button.jsx";
 
-// TODO: Loader
+// TODO: Add  option to choose by Subtopic
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [isLoad, setIsLoad] = useState(false);
 
   const handleTopicClick = async (topic) => {
     try {
+      setIsLoad(true);
       const response = await fetch(
         "https://us-central1-shirsstudiesgame.cloudfunctions.net/getQuestionsByTopic",
         {
@@ -23,18 +26,21 @@ const HomePage = () => {
       );
 
       if (!response.ok) {
+        setIsLoad(false);
         throw new Error("Failed to fetch questions");
       }
 
       const questions = await response.json();
       navigate("/game", { state: { questions } });
     } catch (error) {
+      setIsLoad(false);
       console.error(error);
     }
   };
 
   return (
     <div>
+      {isLoad && <Loader />}
       <h1>Choose a Topic</h1>
       <Button
         className={styles["home-button"]} // Use the CSS module class

@@ -9,7 +9,8 @@
   width: 100vw;
   padding: 20px;
   box-sizing: border-box;
-  text-align: center;
+  text-align: right;
+  direction: rtl;
   background: linear-gradient(to bottom, #6a11cb, #2575fc);
   color: #ffffff;
 }
@@ -22,7 +23,7 @@
 
 .question-game p,
 .question-game h2 {
-  text-align: center;
+  text-align: right;
   margin: 10px 0;
 }
 
@@ -40,7 +41,7 @@
   font-size: 18px;
   padding: 0 18px;
   line-height: 50px;
-  text-align: center;
+  text-align: right;
   text-decoration: none;
   user-select: none;
   -webkit-user-select: none;

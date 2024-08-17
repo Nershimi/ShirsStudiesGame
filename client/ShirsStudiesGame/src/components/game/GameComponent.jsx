@@ -4,9 +4,7 @@ import Button from "../Button";
 import "./GameComponent.css";
 import EndGame from "./EndGame.jsx";
 
-// TODO: fix count of correct answered
-// TODO: debug next question - why user can continue without answer?
-// TODO: find way to avoid repeated questions.
+// TODO: Add option to report on question.
 
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -30,6 +28,8 @@ const QuestionGame = () => {
   const [questionsAnswered, setQuestionsAnswered] = useState([]);
   const [answerDisabled, setAnswerDisabled] = useState(false); // Track if answers are disabled
   const navigate = useNavigate();
+  let count = 0;
+  const [answerCount, setAnswerCount] = useState(0);
 
   useEffect(() => {
     const questions = location.state.questions;
@@ -41,7 +41,7 @@ const QuestionGame = () => {
   };
 
   useEffect(() => {
-    if (questionsAnswered.length === 30) {
+    if (answerCount === 30) {
       setShowDialog(true);
     } else if (shuffledQuestions.length > 0) {
       const currentQuestion = shuffledQuestions[currentIndex];
@@ -68,8 +68,8 @@ const QuestionGame = () => {
         setMessage("תשובה לא נכונה, לא נורא תצליח בפעם הבאה");
       }
       setSelectedAnswer(answer);
-      // setQuestionAnswered(true); // Mark question as answered
-      // setAnswerDisabled(true); // Disable answers after the first selection
+      setQuestionAnswered(true); // Mark question as answered
+      setAnswerDisabled(true); // Disable answers after the first selection
     }
   };
 
@@ -79,14 +79,17 @@ const QuestionGame = () => {
       userAnswer: selectedAnswer,
       correctAnswer: currentQuestion.correctAnswer,
     };
-    if (questionsAnswered.length < 30) {
+    if (answerCount < 30) {
       setMessage("");
       setSelectedAnswer(null);
       setCurrentIndex(
         (prevIndex) => (prevIndex + 1) % shuffledQuestions.length
       );
-      setQuestionsAnswered((prev) => [...prev, collectedQuestion]);
+      if (collectedQuestion.correctAnswer != collectedQuestion.userAnswer) {
+        setQuestionsAnswered((prev) => [...prev, collectedQuestion]);
+      }
       setQuestionAnswered(true);
+      setAnswerCount((prev) => prev + 1);
     }
   };
 
@@ -108,6 +111,7 @@ const QuestionGame = () => {
     setQuestionAnswered(false);
     setCorrectAnswerSelected(false);
     setAnswerDisabled(false);
+    setAnswerCount(0);
   }
 
   if (shuffledQuestions.length === 0) return <p>אין שאלות להציג</p>;
@@ -153,7 +157,7 @@ const QuestionGame = () => {
             <Button
               onClick={handleNextQuestion}
               className="next-button"
-              // disabled={!questionAnswered} // Disable button until question is answered
+              disabled={!questionAnswered} // Disable button until question is answered
             >
               המשך
             </Button>

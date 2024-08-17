@@ -7,7 +7,6 @@ import { signOutUser } from "./../signOutUser.js";
 
 // TODO: add logo
 
-
 export default function Header({ loggedIn, setLoggedIn }) {
   const navigate = useNavigate();
 
@@ -41,7 +40,7 @@ export default function Header({ loggedIn, setLoggedIn }) {
     <div className="header-component">
       <header id="header">
         <div className="left-content">
-          {/* <img src={logo} alt="Logo of website" /> */}
+          <img src="../../public/shirsStudiesGame_updated.png" alt="App logo" />
           <h1>Shirs Studies Game</h1>
         </div>
         <div className="right-content">

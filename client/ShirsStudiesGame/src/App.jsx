@@ -16,6 +16,7 @@ import "./index.css";
 // TODO: add personal details Module.
 // TODO: add personal progress Module.
 // TODO: option to add wrong questions to next section or a unique game
+// TODO: fix languages in All components.
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -52,7 +53,7 @@ function App() {
           }
         />
         <Route path="sign-up" element={<SignUp />} />
-        <Route path="/game" element={<QuestionGame/>} />
+        <Route path="/game" element={<QuestionGame />} />
       </Routes>
     </Router>
   );

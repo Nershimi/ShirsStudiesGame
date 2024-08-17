@@ -1,10 +1,12 @@
 import Button from "../Button";
 
+// TODO: create open DialogItem of wrong and right answer.
+
 export default function EndGame({
   correctAnswersCount,
   handleCloseDialog,
   collectedQuestion,
-  handleReset
+  handleReset,
 }) {
   return (
     <div className="dialog">
