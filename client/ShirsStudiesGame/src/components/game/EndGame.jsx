@@ -1,28 +1,25 @@
-import Button from "../Button";
+import Button from "../Button.jsx";
+import AnswersSummary from "./AnswersSummary.jsx";
 
-// TODO: create open DialogItem of wrong and right answer.
 
 export default function EndGame({
   correctAnswersCount,
+  QuestionsAnsweredWrong,
   handleCloseDialog,
-  collectedQuestion,
+  questionsAnsweredCorrect,
   handleReset,
 }) {
   return (
-    <div className="dialog">
+    <div>
       <p>כל הכבוד הצלחת להגיע ל: {correctAnswersCount} תשובות נכונות.</p>
-      <h2>להלן פירוט התשובות</h2>
-      {collectedQuestion.map((question, index) => (
-        <div key={index}>
-          <h3>
-            שאלה מס'{index + 1} {question.question}
-          </h3>
-          <h4>התשובה שלך היא:</h4>
-          <p>{question.userAnswer}</p>
-          <h4>התשובה הנכונה היא:</h4>
-          <p>{question.correctAnswer}</p>
-        </div>
-      ))}
+      <AnswersSummary
+        head="שגויות"
+        collectedQuestion={QuestionsAnsweredWrong}
+      />
+      <AnswersSummary
+        head="נכונות"
+        collectedQuestion={questionsAnsweredCorrect}
+      />
 
       <Button onClick={handleReset} className="close-dialog-button">
         ResetGame

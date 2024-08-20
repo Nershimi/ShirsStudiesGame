@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../Button";
 import "./GameComponent.css";
 import EndGame from "./EndGame.jsx";
-
-// TODO: Add option to report on question.
+import ReportQuestion from "./ReportQuestion.jsx";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -13,6 +13,8 @@ const shuffleArray = (array) => {
   }
   return array;
 };
+
+const GAME_LIMIT = 30;
 
 const QuestionGame = () => {
   const location = useLocation();
@@ -25,23 +27,60 @@ const QuestionGame = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [questionAnswered, setQuestionAnswered] = useState(false);
   const [correctAnswerSelected, setCorrectAnswerSelected] = useState(false);
-  const [questionsAnswered, setQuestionsAnswered] = useState([]);
-  const [answerDisabled, setAnswerDisabled] = useState(false); // Track if answers are disabled
-  const navigate = useNavigate();
-  let count = 0;
+  const [questionsAnsweredCorrect, setQuestionsAnsweredCorrect] = useState([]);
+  const [questionsAnsweredWrong, setQuestionsAnsweredWrong] = useState([]);
+  const [answerDisabled, setAnswerDisabled] = useState(false);
   const [answerCount, setAnswerCount] = useState(0);
+  const [reporterQuestions, setReporterQuestions] = useState([]);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [userId, setUserId] = useState(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, you can access the userId here
+        setUserId(user.uid);
+      } else {
+        // User is signed out
+        setUserId(null);
+      }
+    });
+
+    // Cleanup subscription on component unmount
+    return () => unsubscribe();
+  }, []);
+
+  const reportOnQuestions = (userId) => {
+    if (!userId) return; // Ensure userId is available
+    try {
+      const response = fetch(
+        "https://us-central1-shirsstudiesgame.cloudfunctions.net/reportAboutQuestions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId, // Include userId in the body
+            question: reporterQuestions, // Rename reportedQuestions to question
+          }),
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const questions = location.state.questions;
     setShuffledQuestions(shuffleArray([...questions]));
   }, [location.state.questions]);
 
-  const navigateToHomePage = () => {
-    navigate("/HomePage");
-  };
-
   useEffect(() => {
-    if (answerCount === 30) {
+    if (answerCount === GAME_LIMIT) {
       setShowDialog(true);
     } else if (shuffledQuestions.length > 0) {
       const currentQuestion = shuffledQuestions[currentIndex];
@@ -54,7 +93,7 @@ const QuestionGame = () => {
       setCorrectAnswerSelected(false);
       setAnswerDisabled(false); // Enable answers when a new question is loaded
     }
-  }, [currentIndex, shuffledQuestions, questionsAnswered]);
+  }, [currentIndex, shuffledQuestions, questionsAnsweredCorrect]);
 
   const handleAnswer = (answer) => {
     if (!questionAnswered) {
@@ -74,31 +113,47 @@ const QuestionGame = () => {
   };
 
   const handleNextQuestion = () => {
+    const currentQuestion = shuffledQuestions[currentIndex];
     const collectedQuestion = {
       question: currentQuestion.question,
       userAnswer: selectedAnswer,
       correctAnswer: currentQuestion.correctAnswer,
     };
-    if (answerCount < 30) {
+    if (answerCount < GAME_LIMIT) {
       setMessage("");
       setSelectedAnswer(null);
       setCurrentIndex(
         (prevIndex) => (prevIndex + 1) % shuffledQuestions.length
       );
-      if (collectedQuestion.correctAnswer != collectedQuestion.userAnswer) {
-        setQuestionsAnswered((prev) => [...prev, collectedQuestion]);
+      if (collectedQuestion.correctAnswer !== collectedQuestion.userAnswer) {
+        setQuestionsAnsweredWrong((prev) => [...prev, collectedQuestion]);
+      } else {
+        setQuestionsAnsweredCorrect((prev) => [...prev, collectedQuestion]);
       }
-      setQuestionAnswered(true);
       setAnswerCount((prev) => prev + 1);
     }
   };
 
   const handleCloseDialog = () => {
     setShowDialog(false);
+    reportOnQuestions(userId);
     navigateToHomePage();
   };
 
+  const navigateToHomePage = () => {
+    navigate("/HomePage");
+  };
+
+  const handleReportClick = () => {
+    setIsReportModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsReportModalOpen(false);
+  };
+
   function handleReset() {
+    reportOnQuestions(userId);
     const questions = location.state.questions;
     setShuffledQuestions(shuffleArray([...questions]));
     setCurrentIndex(0);
@@ -106,7 +161,8 @@ const QuestionGame = () => {
     setSelectedAnswer(null);
     setShuffledAnswers([]);
     setCorrectAnswersCount(0);
-    setQuestionsAnswered([]);
+    setQuestionsAnsweredCorrect([]);
+    setQuestionsAnsweredWrong([]);
     setShowDialog(false);
     setQuestionAnswered(false);
     setCorrectAnswerSelected(false);
@@ -125,7 +181,8 @@ const QuestionGame = () => {
           <EndGame
             correctAnswersCount={correctAnswersCount}
             handleCloseDialog={handleCloseDialog}
-            collectedQuestion={questionsAnswered}
+            questionsAnsweredCorrect={questionsAnsweredCorrect}
+            QuestionsAnsweredWrong={questionsAnsweredWrong}
             handleReset={handleReset}
           />
         ) : (
@@ -133,7 +190,9 @@ const QuestionGame = () => {
             <Button onClick={navigateToHomePage} className="next-button">
               מסך הבית
             </Button>
-            <h3>שאלה {currentIndex + 1} מתוך 30</h3>
+            <h3>
+              שאלה {currentIndex + 1} מתוך {GAME_LIMIT}
+            </h3>
             <h2>{currentQuestion.question}</h2>
             <div>
               {shuffledAnswers.map((answer, index) => (
@@ -161,6 +220,16 @@ const QuestionGame = () => {
             >
               המשך
             </Button>
+            <Button className="next-button" onClick={handleReportClick}>
+              דווח על שאלה
+            </Button>
+            {isReportModalOpen && (
+              <ReportQuestion
+                question={currentQuestion}
+                setReporterQuestions={setReporterQuestions}
+                onClose={handleCloseModal}
+              />
+            )}
           </>
         )}
       </div>

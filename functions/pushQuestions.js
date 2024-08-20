@@ -30,6 +30,7 @@ exports.pushQuestion = functions.https.onRequest((req, res) => {
           wrongAnswers,
           level,
           topic,
+          subtopic,
         } = question;
         const docRef = db.collection("questions").doc(); // Auto-generate ID
 
@@ -39,6 +40,7 @@ exports.pushQuestion = functions.https.onRequest((req, res) => {
           wrongAnswers,
           level,
           topic,
+          subtopic,
         });
       });
 
