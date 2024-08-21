@@ -150,6 +150,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  color: black;
 }
 
 /* Modal Content */
@@ -166,7 +167,7 @@
 
 /* Text Area for Reporting */
 .report-textarea {
-  width: 100%;
+  width: 90%;
   height: 100px;
   margin-bottom: 20px;
   padding: 10px;
@@ -221,7 +222,6 @@
 .report-button:hover {
   background-color: #e63e00;
 }
-
 
 /* Media queries for responsive design */
 @media (max-width: 600px) {

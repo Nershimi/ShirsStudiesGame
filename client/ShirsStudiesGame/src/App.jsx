@@ -12,6 +12,7 @@ import Header from "./components/Header.jsx";
 import { isUserLogin } from "./isUserLogin.js";
 import QuestionGame from "./components/game/GameComponent.jsx";
 import "./index.css";
+import styles from "./App.module.css";
 
 // TODO: add personal details Module.
 // TODO: add personal progress Module.
@@ -36,25 +37,27 @@ function App() {
 
   return (
     <Router>
-      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-      <Routes>
-        <Route
-          path="/HomePage"
-          element={loggedIn ? <HomePage /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/"
-          element={
-            loggedIn ? (
-              <Navigate to="/HomePage" />
-            ) : (
-              <SignIn setLoggedIn={setLoggedIn} />
-            )
-          }
-        />
-        <Route path="sign-up" element={<SignUp />} />
-        <Route path="/game" element={<QuestionGame />} />
-      </Routes>
+      <div className={styles.appContainer}>
+        <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        <Routes>
+          <Route
+            path="/HomePage"
+            element={loggedIn ? <HomePage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/"
+            element={
+              loggedIn ? (
+                <Navigate to="/HomePage" />
+              ) : (
+                <SignIn setLoggedIn={setLoggedIn} />
+              )
+            }
+          />
+          <Route path="sign-up" element={<SignUp />} />
+          <Route path="/game" element={<QuestionGame />} />
+        </Routes>
+      </div>
     </Router>
   );
 }

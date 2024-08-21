@@ -1,4 +1,5 @@
-.login-component .login-container {
+/* AuthForm.module.css */
+.authFormContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,60 +13,63 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
-  box-sizing: border-box;
+  box-sizing: content-box;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.login-component .form-container {
+.formContainer {
   width: 100%;
 }
 
-.login-component .title {
+.title {
   font-size: 2.5rem;
   margin-bottom: 1rem;
   text-align: center;
 }
 
-.login-component .form {
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
 
-.login-component .input-container {
+.inputContainer {
   display: flex;
   align-items: center;
   width: 100%;
   margin-bottom: 1rem;
   background: #fff;
   border-radius: 25px;
-  padding: 0 1rem;
+  padding-left: 1rem; /* שים לב שהפכתי את השימוש ב-padding */
+  padding-right: 1rem;
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
 
-.login-component .icon {
+.icon {
   margin-right: 0.5rem;
   color: #6a11cb;
   font-size: 1.5rem;
 }
 
-.login-component .input,
-.login-component .password-input {
-  flex: 1;
-  border: 1px solid rgb(195, 191, 191);
+.input,
+.passwordInput {
+  flex: 1; /* שים לב לשימוש ב-flex grow */
+  border: none;
   outline: none;
   padding: 0.75rem 1rem;
   border-radius: 25px;
   font-size: 1rem;
   box-sizing: border-box;
+  width: 11cm; /* גורם ל-input להתפרס עד סוף הרוחב */
+  min-width: 0; /* מונע גלילה פנימית */
 }
 
-.login-component .show-button {
+.showButton {
   padding: 0.5rem;
   border-radius: 5px;
   border: none;
@@ -73,10 +77,10 @@
   color: #fff;
   cursor: pointer;
   margin-left: 0.5rem;
-  margin-right: -1rem;
+  flex-shrink: 0; /* מוודא שהכפתור לא יתכווץ */
 }
 
-.login-component .button {
+.button {
   padding: 0.75rem 1.5rem;
   border-radius: 25px;
   border: none;
@@ -90,77 +94,79 @@
   transition: background-color 0.3s;
 }
 
-.login-component .button:hover {
+.button:hover {
   background-color: #5a0cb5;
 }
 
-.login-component .forgot-password {
+.forgotPassword {
   margin-top: 1rem;
   color: #fff;
   text-decoration: underline;
   cursor: pointer;
 }
 
-.login-component .error {
+.error {
   color: red;
   margin-bottom: 1rem;
 }
 
+/* Media Queries */
 @media (max-width: 600px) {
-  .login-component .login-container {
-    padding: 10px;
+  .authFormContainer {
+    padding: 30px;
     margin-top: 1rem;
   }
 
-  .login-component .title {
+  .title {
     font-size: 2rem;
   }
 
-  .login-component .input-container {
+  .inputContainer {
     padding: 0.5rem;
   }
-
-  .login-component .button {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .login-component .login-container {
-    padding: 10px;
-    margin-top: 1rem;
-  }
-
-  .login-component .title {
-    font-size: 2rem;
-  }
-
-  .login-component .input-container {
-    padding: 0.5rem;
-  }
-
-  .login-component .button {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
+  .input,
+  .passwordInput,
+  .button {
+    width: 100%;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .login-component .login-container {
+  .authFormContainer {
     padding: 15px;
   }
 
-  .login-component .title {
+  .title {
     font-size: 2.2rem;
   }
 
-  .login-component .input-container {
+  .inputContainer {
     padding: 0.75rem;
   }
 
-  .login-component .button {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.95rem;
+  .input,
+  .passwordInput,
+  .button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  .authFormContainer {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .inputContainer {
+    padding: 0.25rem;
+  }
+
+  .input,
+  .passwordInput,
+  .button {
+    width: 100%;
   }
 }

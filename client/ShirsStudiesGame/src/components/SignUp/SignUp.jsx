@@ -8,7 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Button";
-import "../login/login.css";
+import styles from "../login/AuthForm.module.css";
 
 export default function SignUp() {
   const [newUser, setNewUser] = useState({
@@ -100,98 +100,92 @@ export default function SignUp() {
   };
 
   return (
-    <div className="login-component">
-      <div className="login-container">
-        <div className="form-container">
-          <h1 className="title">Sign Up</h1>
-          {error && <p className="color: white">{error}</p>}
-          <form className="form" onSubmit={handleSubmit}>
-            <div className="input-container">
-              <Input
-                type="text"
-                className="input"
-                placeholder="Full Name"
-                value={newUser.fullName}
-                onChange={(e) => handleChange("fullName", e.target.value)}
-                onBlur={() => setHasInteractedFullName(true)}
-                hasInteracted={hasInteractedFullName}
-                error={
-                  hasInteractedFullName &&
-                  newUser.fullName.length <= 0 &&
-                  "Missing name"
-                }
-              />
-            </div>
-            <div className="input-container">
-              <Input
-                type="date"
-                className="input"
-                placeholder="Date of Birth"
-                value={newUser.dateOfBirth}
-                onChange={(e) => handleChange("dateOfBirth", e.target.value)}
-                onBlur={() => setHasInteractedDate(true)}
-                hasInteracted={hasInteractedDate}
-                error={hasInteractedDate && "Missing date of birth"}
-              />
-            </div>
-            <div className="input-container">
-              <Input
-                type="email"
-                className="input"
-                placeholder="Email"
-                value={newUser.email}
-                onChange={(e) => handleChange("email", e.target.value)}
-                error={
-                  !emailValid &&
-                  newUser.email.length > 0 &&
-                  "This mail not Valid"
-                }
-              />
-            </div>
-            <div className="input-container">
-              <Input
-                type={showPass.password ? "text" : "password"}
-                className="password-input"
-                placeholder="Password"
-                value={newUser.password}
-                onChange={(e) => handleChange("password", e.target.value)}
-                error={
-                  !passwordValid &&
-                  newUser.password.length > 0 &&
-                  "This password not Valid"
-                }
-              />
-              <Button
-                type="button"
-                className="show-button"
-                onClick={() => toggleShowPass("password")}
-              >
-                {showPass.password ? "Hide" : "Show"}
-              </Button>
-            </div>
-            <div className="input-container">
-              <Input
-                type={showPass.confirmPassword ? "text" : "password"}
-                className="password-input"
-                placeholder="Confirm Password"
-                value={secondPassword}
-                onChange={handleSecondPasswordChange}
-                error={!isEqualPassword && "Password not match"}
-              />
-              <Button
-                type="button"
-                className="show-button"
-                onClick={() => toggleShowPass("confirmPassword")}
-              >
-                {showPass.confirmPassword ? "Hide" : "Show"}
-              </Button>
-            </div>
-            <Button className="button" type="submit">
-              Sign up
-            </Button>
-          </form>
+    <div className={styles.authFormContainer}>
+      <h1 className={styles.title}>Sign Up</h1>
+      {error && <p className={styles.error}>{error}</p>}
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.inputContainer}>
+          <Input
+            type="text"
+            className={styles.input}
+            placeholder="Full Name"
+            value={newUser.fullName}
+            onChange={(e) => handleChange("fullName", e.target.value)}
+            onBlur={() => setHasInteractedFullName(true)}
+            hasInteracted={hasInteractedFullName}
+            error={
+              hasInteractedFullName &&
+              newUser.fullName.length <= 0 &&
+              "Missing name"
+            }
+          />
         </div>
-      </div>
+        <div className={styles.inputContainer}>
+          <Input
+            type="date"
+            className={styles.input}
+            placeholder="Date of Birth"
+            value={newUser.dateOfBirth}
+            onChange={(e) => handleChange("dateOfBirth", e.target.value)}
+            onBlur={() => setHasInteractedDate(true)}
+            hasInteracted={hasInteractedDate}
+            error={hasInteractedDate && "Missing date of birth"}
+          />
+        </div>
+        <div className={styles.inputContainer}>
+          <Input
+            type="email"
+            className={styles.input}
+            placeholder="Email"
+            value={newUser.email}
+            onChange={(e) => handleChange("email", e.target.value)}
+            error={
+              !emailValid && newUser.email.length > 0 && "This mail not Valid"
+            }
+          />
+        </div>
+        <div className={styles.inputContainer}>
+          <Input
+            type={showPass.password ? "text" : "password"}
+            className={styles.passwordInput}
+            placeholder="Password"
+            value={newUser.password}
+            onChange={(e) => handleChange("password", e.target.value)}
+            error={
+              !passwordValid &&
+              newUser.password.length > 0 &&
+              "This password not Valid"
+            }
+          />
+          <Button
+            type="button"
+            className={styles.showButton}
+            onClick={() => toggleShowPass("password")}
+          >
+            {showPass.password ? "Hide" : "Show"}
+          </Button>
+        </div>
+        <div className={styles.inputContainer}>
+          <Input
+            type={showPass.confirmPassword ? "text" : "password"}
+            className={styles.passwordInput}
+            placeholder="Confirm Password"
+            value={secondPassword}
+            onChange={handleSecondPasswordChange}
+            error={!isEqualPassword && "Password not match"}
+          />
+          <Button
+            type="button"
+            className={styles.showButton}
+            onClick={() => toggleShowPass("confirmPassword")}
+          >
+            {showPass.confirmPassword ? "Hide" : "Show"}
+          </Button>
+        </div>
+        <Button className={styles.button} type="submit">
+          Sign up
+        </Button>
+      </form>
     </div>
   );
 }

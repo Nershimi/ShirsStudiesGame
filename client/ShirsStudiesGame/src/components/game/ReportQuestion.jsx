@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "../Button.jsx";
+import CloseButton from "../CloseButton.jsx";
 
 export default function ReportQuestion({
   question,
@@ -35,13 +36,16 @@ export default function ReportQuestion({
   return (
     <div className="modal-overlay">
       <div className="modal-content">
+        <p>
+        <CloseButton onClick={onClose} />
+        </p>
         <label htmlFor="report-type">בחר סיבת דיווח:</label>
         <select
           id="report-type"
           value={reportQuestion.typeofReport}
           onChange={handleSelectChange}
         >
-          <option value="" disabled>
+          <option value="" disabled selected>
             בחר את סיבת הדיווח
           </option>
           <option value="בעיה בשאלה">יש בעיה בשאלה - ניסוח/רלוונטיות</option>
@@ -50,14 +54,16 @@ export default function ReportQuestion({
           </option>
           <option value="שאלה לא רלוונטית">שאלה לא רלוונטית לנושא</option>
         </select>
-        <label htmlFor="report-details">אנא פרט את הסיבה:</label>
-        <textarea
-          id="report-details"
-          placeholder="אנא כתוב בפירוט מה הבעיה ומה נדרש לתקן"
-          className="report-textarea"
-          value={reportQuestion.details}
-          onChange={handleTextAreaChange}
-        />
+        <div>
+          <label htmlFor="report-details">אנא פרט את הסיבה:</label>
+          <textarea
+            id="report-details"
+            placeholder="אנא כתוב בפירוט מה הבעיה ומה נדרש לתקן"
+            className="report-textarea"
+            value={reportQuestion.details}
+            onChange={handleTextAreaChange}
+          />
+        </div>
         <Button onClick={handleSubmit}>דווח על השאלה</Button>
       </div>
     </div>

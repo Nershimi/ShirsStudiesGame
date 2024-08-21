@@ -1,0 +1,15 @@
+/* closeButton.css */
+.modal-content .close-button {
+    background: transparent !important;
+    border: none !important;
+    font-size: 24px !important;
+    cursor: pointer !important;
+    color: #333 !important;
+    padding: 0 !important;
+    transition: color 0.3s !important;
+  }
+  
+  .modal-content .close-button:hover {
+    color: red !important;
+  }
+  

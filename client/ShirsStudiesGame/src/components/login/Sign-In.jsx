@@ -5,7 +5,7 @@ import Input from "../Input.jsx";
 import Button from "../Button.jsx";
 import { handleSignIn } from "./handleSignIn.js";
 import { resetPassword } from "./handleResetPassword.js";
-import "./login.css";
+import styles from "./AuthForm.module.css";
 
 import { loadLanguage } from "./../../helpers/loadLanguage.js"; // Import the helper function
 
@@ -66,52 +66,48 @@ export default function SignIn({ lang = "en", setLoggedIn }) {
   }
 
   return (
-    <div className="login-component">
-      <div className="login-container">
-        <div className="form-container">
-          <h1 className="title">{texts.title || "Loading..."}</h1>
-          <form onSubmit={handleSubmit} className="form">
-            {errorMessage && <div className="error">{errorMessage}</div>}
-            <div className="input-container">
-              <FaUser className="icon" />
-              <Input
-                type="email"
-                name="email"
-                value={userFields.email}
-                placeholder={texts.usernamePlaceholder || "Loading..."}
-                onChange={handleChange}
-                className="input"
-              />
-            </div>
-            <div className="input-container">
-              <FaLock className="icon" />
-              <Input
-                type={showPass ? "text" : "password"}
-                placeholder={texts.passwordPlaceholder || "Loading..."}
-                name="password"
-                value={userFields.password}
-                onChange={handleChange}
-                className="input password-input"
-              />
-              <Button
-                type="button"
-                onClick={() => setShowPass(!showPass)}
-                className="show-button"
-              >
-                {showPass
-                  ? texts.showButton?.hide || "Hide"
-                  : texts.showButton?.show || "Show"}
-              </Button>
-            </div>
-            <Button type="submit" className="button">
-              {texts.loginButton || "Loading..."}
-            </Button>
-            <p className="forgot-password" onClick={handleResetPassword}>
-              {texts.forgotPassword || "Loading..."}
-            </p>
-          </form>
+    <div className={styles.authFormContainer}>
+      <h2 className={styles.title}>{texts.title || "Loading..."}</h2>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        {errorMessage && <div className={styles.error}>{errorMessage}</div>}
+        <div className={styles.inputContainer}>
+          <FaUser className={`icon-class ${styles.icon}`} />
+          <Input
+            type="email"
+            name="email"
+            value={userFields.email}
+            placeholder={texts.usernamePlaceholder || "Loading..."}
+            onChange={handleChange}
+            className={styles.input}
+          />
         </div>
-      </div>
+        <div className={styles.inputContainer}>
+          <FaLock className={`icon-class ${styles.icon}`} />
+          <Input
+            type={showPass ? "text" : "password"}
+            placeholder={texts.passwordPlaceholder || "Loading..."}
+            name="password"
+            value={userFields.password}
+            onChange={handleChange}
+            className={styles.passwordInput}
+          />
+          <Button
+            type="button"
+            onClick={() => setShowPass(!showPass)}
+            className={styles.showButton}
+          >
+            {showPass
+              ? texts.showButton?.hide || "Hide"
+              : texts.showButton?.show || "Show"}
+          </Button>
+        </div>
+        <Button type="submit" className={styles.button}>
+          {texts.loginButton || "Loading..."}
+        </Button>
+        <p className={styles.forgotPassword} onClick={handleResetPassword}>
+          {texts.forgotPassword || "Loading..."}
+        </p>
+      </form>
     </div>
   );
 }
