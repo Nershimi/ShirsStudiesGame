@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../Button";
-import "./GameComponent.css";
 import EndGame from "./EndGame.jsx";
 import ReportQuestion from "./ReportQuestion.jsx";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import styles from "./GameComponent.module.css";
 
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -14,7 +14,7 @@ const shuffleArray = (array) => {
   return array;
 };
 
-const GAME_LIMIT = 30;
+const GAME_LIMIT = 3;
 
 const QuestionGame = () => {
   const location = useLocation();
@@ -175,8 +175,8 @@ const QuestionGame = () => {
   const currentQuestion = shuffledQuestions[currentIndex];
 
   return (
-    <div className="game-container">
-      <div className="question-game">
+    <div className={styles.gameContainer}>
+      <div className={styles.questionGame}>
         {showDialog ? (
           <EndGame
             correctAnswersCount={correctAnswersCount}
@@ -187,7 +187,7 @@ const QuestionGame = () => {
           />
         ) : (
           <>
-            <Button onClick={navigateToHomePage} className="next-button">
+            <Button onClick={navigateToHomePage} className={styles.nextButton}>
               מסך הבית
             </Button>
             <h3>
@@ -199,11 +199,11 @@ const QuestionGame = () => {
                 <Button
                   key={index}
                   onClick={() => handleAnswer(answer)}
-                  className={`answer-button ${
+                  className={`${styles.answerButton} ${
                     selectedAnswer === answer
                       ? answer === currentQuestion.correctAnswer
-                        ? "correct"
-                        : "incorrect"
+                        ? `${styles.answerButtonCorrect}`
+                        : `${styles.answerButtonIncorrect}`
                       : ""
                   }`}
                   disabled={answerDisabled}
@@ -215,12 +215,12 @@ const QuestionGame = () => {
             {message && <p>{message}</p>}
             <Button
               onClick={handleNextQuestion}
-              className="next-button"
+              className={styles.nextButton}
               disabled={!questionAnswered} // Disable button until question is answered
             >
               המשך
             </Button>
-            <Button className="next-button" onClick={handleReportClick}>
+            <Button className={styles.nextButton} onClick={handleReportClick}>
               דווח על שאלה
             </Button>
             {isReportModalOpen && (

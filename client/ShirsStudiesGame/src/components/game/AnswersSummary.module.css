@@ -1,0 +1,17 @@
+/* AnswersSummary.module.css */
+.accordionTitle {
+  cursor: pointer;
+  background-color: #69a2df;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.accordionContent {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}

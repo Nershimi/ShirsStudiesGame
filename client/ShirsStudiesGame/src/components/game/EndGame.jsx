@@ -1,6 +1,6 @@
 import Button from "../Button.jsx";
 import AnswersSummary from "./AnswersSummary.jsx";
-
+import styles from "./EndGame.module.css";
 
 export default function EndGame({
   correctAnswersCount,
@@ -10,7 +10,7 @@ export default function EndGame({
   handleReset,
 }) {
   return (
-    <div>
+    <div className={styles.dialog}>
       <p>כל הכבוד הצלחת להגיע ל: {correctAnswersCount} תשובות נכונות.</p>
       <AnswersSummary
         head="שגויות"
@@ -21,10 +21,10 @@ export default function EndGame({
         collectedQuestion={questionsAnsweredCorrect}
       />
 
-      <Button onClick={handleReset} className="close-dialog-button">
+      <Button onClick={handleReset} className={styles.closeDialogButton}>
         ResetGame
       </Button>
-      <Button onClick={handleCloseDialog} className="close-dialog-button">
+      <Button onClick={handleCloseDialog} className={styles.closeDialogButton}>
         Close
       </Button>
     </div>

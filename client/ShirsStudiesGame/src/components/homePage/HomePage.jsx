@@ -43,25 +43,25 @@ const HomePage = () => {
       {isLoad && <Loader />}
       <h1>Choose a Topic</h1>
       <Button
-        className={styles["home-button"]} // Use the CSS module class
+        className={styles["home-button"]} 
         onClick={() => handleTopicClick("ביולוגיה מולקולרית")}
       >
         ביולוגיה מולקולרית
       </Button>
       <Button
-        className={styles["home-button"]} // Use the CSS module class
+        className={styles["home-button"]} 
         onClick={() => handleTopicClick("אימונולוגיה")}
       >
         אימונולוגיה
       </Button>
       <Button
-        className={styles["home-button"]} // Use the CSS module class
+        className={styles["home-button"]} 
         onClick={() => handleTopicClick("פזיולוגיה ב")}
       >
         פזיולוגיה ב
       </Button>
       <Button
-        className={styles["home-button"]} // Use the CSS module class
+        className={styles["home-button"]} 
         onClick={() => handleTopicClick("מבוא למיקרוביולוגיה")}
       >
         מבוא למיקרוביולוגיה

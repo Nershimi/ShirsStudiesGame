@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../Button.jsx";
 import CloseButton from "../CloseButton.jsx";
+import styles from "./ReportQuestion.module.css";
 
 export default function ReportQuestion({
   question,
@@ -34,11 +35,8 @@ export default function ReportQuestion({
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <p>
-        <CloseButton onClick={onClose} />
-        </p>
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalContent}>
         <label htmlFor="report-type">בחר סיבת דיווח:</label>
         <select
           id="report-type"
@@ -59,12 +57,15 @@ export default function ReportQuestion({
           <textarea
             id="report-details"
             placeholder="אנא כתוב בפירוט מה הבעיה ומה נדרש לתקן"
-            className="report-textarea"
+            className={styles.reportTextarea}
             value={reportQuestion.details}
             onChange={handleTextAreaChange}
           />
         </div>
-        <Button onClick={handleSubmit}>דווח על השאלה</Button>
+        <Button className={styles.submitReportButton} onClick={handleSubmit}>
+          דווח על השאלה
+        </Button>
+        <CloseButton className={styles.closeModalButton} onClick={onClose} />
       </div>
     </div>
   );

@@ -170,3 +170,22 @@
     width: 100%;
   }
 }
+
+@media (max-width: 480px) {
+  .authFormContainer {
+    max-width: 90%;
+    padding: 10px;
+  }
+  .input,
+  .passwordInput,
+  .button {
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  .showButton {
+    padding: 0.25rem;
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+}

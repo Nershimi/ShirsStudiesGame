@@ -1,0 +1,130 @@
+/* GameComponent.module.css */
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: right;
+  direction: rtl;
+  /* background: linear-gradient(to bottom, #6a11cb, #2575fc); */
+  color: #ffffff;
+}
+
+.questionGame {
+  max-width: 600px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.answerButton {
+  font-family: "Varela Round", sans-serif;
+  font-style: normal;
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: right;
+  text-decoration: none;
+  user-select: none;
+  margin: 10px 0;
+  width: 100%;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.answerButton:hover {
+  background-color: #fff;
+  color: #422800;
+}
+
+.answerButton:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+.answerButtonCorrect {
+  background-color: green;
+  color: white;
+}
+
+.answerButtonIncorrect {
+  background-color: red;
+  color: white;
+}
+
+.answerButtonCorrect:hover {
+  background-color: green; /* שמור על הצבע הירוק */
+  color: white;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.answerButtonIncorrect:hover {
+  background-color: red; /* שמור על הצבע האדום */
+  color: white;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.nextButton {
+  font-family: "Varela Round", sans-serif;
+  font-style: normal;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nextButton:hover {
+  background-color: #0056b3;
+}
+
+/* Media queries */
+@media (max-width: 600px) {
+  .gameContainer {
+    padding: 10px;
+  }
+
+  .answerButton {
+    padding: 10px;
+    font-size: 14px;
+    line-height: 40px;
+  }
+
+  .nextButton {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .questionGame {
+    margin: 10px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .answerButton {
+    font-size: 15px;
+    line-height: 45px;
+  }
+
+  .nextButton {
+    padding: 9px 18px;
+    font-size: 15px;
+  }
+}

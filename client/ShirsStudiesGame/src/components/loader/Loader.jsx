@@ -1,9 +1,8 @@
 import React from "react";
-import "./Loader.css";
-
+import styles from "./Loader.module.css";
 const Loader = () => (
-  <div className="loader-overlay">
-    <span className="loader">good luck</span>
+  <div className={styles.loaderOverlay}>
+    <span className={styles.loader}>good luck</span>
   </div>
 );
 

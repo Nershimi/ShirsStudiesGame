@@ -1,0 +1,32 @@
+/* EndGame.module.css */
+.dialog {
+  background-color: #f0f8ff;
+  border: 2px solid #87ceeb;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 10px 0;
+  color: black;
+}
+
+.dialog p {
+  font-size: 16px;
+  color: #2e8b57;
+  margin-bottom: 20px;
+}
+
+.closeDialogButton {
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.closeDialogButton:hover {
+  background-color: #ff1493;
+}
