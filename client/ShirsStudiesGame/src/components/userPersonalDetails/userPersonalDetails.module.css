@@ -1,0 +1,65 @@
+/* UserPersonalDetails.module.css */
+.detailsContainer {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  width: 100%;
+  color: #f9f9f9;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.centerWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.detailsHeader {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.detailsItem {
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 15px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.detailsLabel {
+  font-weight: bold;
+}
+
+.detailsValue {
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .detailsContainer {
+    padding: 15px;
+    margin: 15px 0;
+  }
+
+  .detailsItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .detailsValue {
+    margin-top: 5px;
+  }
+}

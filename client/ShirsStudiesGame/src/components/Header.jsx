@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Button from "./Button.jsx";
 import { isUserLogin } from "./../isUserLogin.js";
 import { signOutUser } from "./../signOutUser.js";
-import styles from "./Header.module.css"; // מוודא שהייבוא הוא עם 'styles'
+import styles from "./Header.module.css";
+import Sidebar from "./sidebar/Sidebar.jsx";
 
 const LOGO =
   "https://firebasestorage.googleapis.com/v0/b/shirsstudiesgame.appspot.com/o/shirsStudiesGame_updated.png?alt=media&token=1ff9959f-e111-4719-ab96-649cf0da6903";
 
-// TODO: add logo
 
 export default function Header({ loggedIn, setLoggedIn }) {
   const navigate = useNavigate();
@@ -42,6 +42,7 @@ export default function Header({ loggedIn, setLoggedIn }) {
   return (
     <div className={styles.header}>
       <div className={styles.leftContent}>
+        <Sidebar />
         <img src={LOGO} alt="App logo" />
         <h1 className={styles.headerTitle}>Shirs Studies Game</h1>
       </div>

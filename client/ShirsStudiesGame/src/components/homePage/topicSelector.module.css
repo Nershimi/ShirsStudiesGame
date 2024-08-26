@@ -1,0 +1,56 @@
+/* TopicSelector.module.css */
+.topicContainer {
+  width: 300px; /* הגדרת רוחב קבוע לכל נושא */
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #5bc9df;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  position: relative;
+}
+
+.topicTitle {
+  font-family: "Varela Round", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #343d40;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  direction: rtl;
+}
+
+.topicArrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+}
+
+.topicArrow.open {
+  transform: rotate(180deg);
+}
+
+.subTopicsList {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.subTopicsList.open {
+  display: flex;
+}
+
+.subTopicItem {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #257483;
+  transition: background-color 0.3s;
+}
+
+.subTopicItem:hover {
+  background-color: #d0d0d0;
+}

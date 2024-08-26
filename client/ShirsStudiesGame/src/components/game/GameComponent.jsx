@@ -14,7 +14,7 @@ const shuffleArray = (array) => {
   return array;
 };
 
-const GAME_LIMIT = 3;
+const GAME_LIMIT = 30;
 
 const QuestionGame = () => {
   const location = useLocation();
@@ -75,9 +75,15 @@ const QuestionGame = () => {
   };
 
   useEffect(() => {
-    const questions = location.state.questions;
-    setShuffledQuestions(shuffleArray([...questions]));
-  }, [location.state.questions]);
+    const allQuestions = location.state.questions;
+    const filterQuestions = location.state.filteredQuestion;
+    const questions = filterQuestions ? filterQuestions : allQuestions;
+    if (Array.isArray(questions)) {
+      setShuffledQuestions(shuffleArray([...questions]));
+    } else {
+      console.error("Questions are not in expected format:", questions);
+    }
+  }, [location.state?.questions]);
 
   useEffect(() => {
     if (answerCount === GAME_LIMIT) {
@@ -197,7 +203,7 @@ const QuestionGame = () => {
             <div>
               {shuffledAnswers.map((answer, index) => (
                 <Button
-                  key={index}
+                  key={`${currentQuestion.question}-${answer}`}
                   onClick={() => handleAnswer(answer)}
                   className={`${styles.answerButton} ${
                     selectedAnswer === answer

@@ -13,11 +13,13 @@ import { isUserLogin } from "./isUserLogin.js";
 import QuestionGame from "./components/game/GameComponent.jsx";
 import "./index.css";
 import styles from "./App.module.css";
+import UserPersonalDetails from "./components/userPersonalDetails/UserPersonalDetails.jsx";
 
 // TODO: add personal details Module.
 // TODO: add personal progress Module.
 // TODO: option to add wrong questions to next section or a unique game
 // TODO: fix languages in All components.
+// TODO: add side bar (topic, progress, about, personal)
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -56,6 +58,7 @@ function App() {
           />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="/game" element={<QuestionGame />} />
+          <Route path="/userDetails" element={<UserPersonalDetails />} />
         </Routes>
       </div>
     </Router>
