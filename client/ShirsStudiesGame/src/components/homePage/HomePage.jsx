@@ -2,17 +2,27 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import Loader from "../loader/Loader.jsx";
-import Button from "../Button.jsx";
 import TopicSelector from "./TopicSelector.jsx";
 
 const TOPICS = [
+  {
+    title: "ביוכימיה 2",
+    subTopics: ["מבוא למטבוליזם", "גליקוליזה", "גלוקונאוגנזה ומסלול הפנטוזות", "מעגל קרבס",],
+  },
   {
     title: "מבוא למיקרוביולוגיה",
     subTopics: [],
   },
   {
     title: "אימונולוגיה",
-    subTopics: [],
+    subTopics: [
+      "תאי מערכת החיסון",
+      "מנגנונים ותהליכים חיסוניים",
+      "מערכות חיסון",
+      "נוגדנים וציטוקינים",
+      "שיטות וכלים במעבדה",
+      "פתולוגיות והפרעות במערכת החיסון",
+    ],
   },
   {
     title: "ביולוגיה מולקולרית",

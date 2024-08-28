@@ -102,7 +102,9 @@ export default function SignUp() {
   return (
     <div className={styles.authFormContainer}>
       <h1 className={styles.title}>Sign Up</h1>
-      {error && <p className={styles.error}>{error}</p>}
+      {error && (
+        <p className={styles.error}>{"לא ניתן ליצור משתמש, אנא נסה שנית"}</p>
+      )}
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.inputContainer}>
           <Input

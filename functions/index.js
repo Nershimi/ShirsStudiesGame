@@ -4,6 +4,7 @@ const { getQuestionsByTopic } = require("./getQuestionsByTopic");
 const { reportAboutQuestions } = require("./reportAboutQuestions");
 const { getUserDetails } = require("./getUserDetails");
 const { updateSubtopicQuestions } = require("./updateSubtopicQuestions");
+const { deleteDocumentsBySubtopic } = require("./deleteSubtopicDoc");
 
 module.exports = {
   saveUserPersonalDetails,
@@ -11,5 +12,6 @@ module.exports = {
   getQuestionsByTopic,
   reportAboutQuestions,
   getUserDetails,
-  updateSubtopicQuestions
+  updateSubtopicQuestions,
+  deleteDocumentsBySubtopic,
 };
