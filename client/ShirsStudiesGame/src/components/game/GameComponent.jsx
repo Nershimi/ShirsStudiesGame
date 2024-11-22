@@ -17,6 +17,7 @@ const shuffleArray = (array) => {
 const GAME_LIMIT = 30;
 
 const QuestionGame = () => {
+  const [gameLimit, setGameLimit] = useState(GAME_LIMIT || 30);
   const location = useLocation();
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -80,13 +81,16 @@ const QuestionGame = () => {
     const questions = filterQuestions ? filterQuestions : allQuestions;
     if (Array.isArray(questions)) {
       setShuffledQuestions(shuffleArray([...questions]));
+      setGameLimit(
+        questions.length > GAME_LIMIT ? GAME_LIMIT : questions.length
+      ); // Update gameLimit based on number of questions
     } else {
       console.error("Questions are not in expected format:", questions);
     }
   }, [location.state?.questions]);
 
   useEffect(() => {
-    if (answerCount === GAME_LIMIT) {
+    if (answerCount === gameLimit) {
       setShowDialog(true);
     } else if (shuffledQuestions.length > 0) {
       const currentQuestion = shuffledQuestions[currentIndex];
@@ -94,12 +98,12 @@ const QuestionGame = () => {
         currentQuestion.correctAnswer,
         ...currentQuestion.wrongAnswers,
       ];
-      setShuffledAnswers(allAnswers.sort(() => Math.random() - 0.5));
+      setShuffledAnswers(shuffleArray(allAnswers));
       setQuestionAnswered(false);
       setCorrectAnswerSelected(false);
       setAnswerDisabled(false); // Enable answers when a new question is loaded
     }
-  }, [currentIndex, shuffledQuestions, questionsAnsweredCorrect]);
+  }, [currentIndex, shuffledQuestions, answerCount, gameLimit]);
 
   const handleAnswer = (answer) => {
     if (!questionAnswered) {
@@ -118,6 +122,13 @@ const QuestionGame = () => {
     }
   };
 
+  useEffect(() => {
+    // console.log("answerCount:", answerCount, "gameLimit:", gameLimit);
+    if (answerCount === gameLimit) {
+      setShowDialog(true);
+    }
+  }, [answerCount, gameLimit]);
+
   const handleNextQuestion = () => {
     const currentQuestion = shuffledQuestions[currentIndex];
     const collectedQuestion = {
@@ -125,7 +136,7 @@ const QuestionGame = () => {
       userAnswer: selectedAnswer,
       correctAnswer: currentQuestion.correctAnswer,
     };
-    if (answerCount < GAME_LIMIT) {
+    if (answerCount < gameLimit) {
       setMessage("");
       setSelectedAnswer(null);
       setCurrentIndex(
@@ -136,7 +147,7 @@ const QuestionGame = () => {
       } else {
         setQuestionsAnsweredCorrect((prev) => [...prev, collectedQuestion]);
       }
-      setAnswerCount((prev) => prev + 1);
+      setAnswerCount((prev) => prev + 1); // Make sure this is correctly updating
     }
   };
 
@@ -160,7 +171,9 @@ const QuestionGame = () => {
 
   function handleReset() {
     reportOnQuestions(userId);
-    const questions = location.state.questions;
+    const allQuestions = location.state.questions;
+    const filterQuestions = location.state.filteredQuestion;
+    const questions = filterQuestions ? filterQuestions : allQuestions;
     setShuffledQuestions(shuffleArray([...questions]));
     setCurrentIndex(0);
     setMessage("");
@@ -197,7 +210,7 @@ const QuestionGame = () => {
               מסך הבית
             </Button>
             <h3>
-              שאלה {currentIndex + 1} מתוך {GAME_LIMIT}
+              שאלה {currentIndex + 1} מתוך {gameLimit}
             </h3>
             <h2>{currentQuestion.question}</h2>
             <div>

@@ -46,7 +46,7 @@ exports.pushQuestion = functions.https.onRequest((req, res) => {
 
       await batch.commit();
 
-      res.status(200).send("Questions saved successfully.");
+      res.status(200).send(`${questions.length} Questions saved successfully.`);
     } catch (error) {
       console.error("Error saving questions:", error);
       res.status(500).send("Internal Server Error");

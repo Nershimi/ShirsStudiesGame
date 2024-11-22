@@ -25,7 +25,7 @@ exports.reportAboutQuestions = functions.https.onRequest(async (req, res) => {
       const userRef = db.collection("usersDetails").doc(userId);
 
       question.forEach((item) => {
-        const { questionId, topic, typeOfReport } = item;
+        const { questionId, topic, typeOfReport, details } = item;
         const questionRef = db.collection("questions").doc(questionId);
 
         const docRef = db.collection("ReporterQuestions").doc();
@@ -33,12 +33,15 @@ exports.reportAboutQuestions = functions.https.onRequest(async (req, res) => {
           questionRef,
           topic,
           typeOfReport,
+          details,
           userRef,
         });
       });
 
       await batch.commit();
-      res.status(200).json({ ok: true, message: "Questions reported successfully." });
+      res
+        .status(200)
+        .json({ ok: true, message: "Questions reported successfully." });
     } catch (error) {
       console.error("Error saving questions:", error);
       res.status(500).send("Internal Server Error");

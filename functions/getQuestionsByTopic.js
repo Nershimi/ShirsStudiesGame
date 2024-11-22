@@ -23,16 +23,29 @@ exports.getQuestionsByTopic = functions.https.onRequest((req, res) => {
       const { topic } = req.body;
 
       if (!topic) {
-        return res.status(400).send("Topic is required");
+        return res.status(400).send("Course name is required");
       }
 
-      // Fetch all questions for the specified topic
+      // Fetch the course document based on the course name
+      const coursesSnapshot = await db
+        .collection("courses")
+        .where("course", "==", topic)
+        .limit(1) // Expecting a single match
+        .get();
+
+      if (coursesSnapshot.empty) {
+        return res.status(404).send("Course not found");
+      }
+
+      const courseRef = coursesSnapshot.docs[0].ref;
+
+      // Fetch all questions for the specified course
       const querySnapshot = await db
         .collection("questions")
-        .where("topic", "==", topic)
+        .where("topic", "==", courseRef)
         .get();
-      const questions = [];
 
+      const questions = [];
       querySnapshot.forEach((doc) => {
         questions.push({ id: doc.id, ...doc.data() });
       });
@@ -40,12 +53,8 @@ exports.getQuestionsByTopic = functions.https.onRequest((req, res) => {
       if (questions.length === 0) {
         return res
           .status(404)
-          .send("No questions found for the specified topic");
+          .send("No questions found for the specified course");
       }
-
-      // Randomly select 30 questions
-      // const shuffledQuestions = questions.sort(() => 0.5 - Math.random());
-      // const selectedQuestions = shuffledQuestions.slice(0, 30);
 
       res.status(200).json(questions);
     } catch (error) {

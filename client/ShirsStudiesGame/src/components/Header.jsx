@@ -9,7 +9,6 @@ import Sidebar from "./sidebar/Sidebar.jsx";
 const LOGO =
   "https://firebasestorage.googleapis.com/v0/b/shirsstudiesgame.appspot.com/o/shirsStudiesGame_updated.png?alt=media&token=1ff9959f-e111-4719-ab96-649cf0da6903";
 
-
 export default function Header({ loggedIn, setLoggedIn }) {
   const navigate = useNavigate();
 

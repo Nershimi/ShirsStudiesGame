@@ -1,5 +1,4 @@
 import styles from "./topicSelector.module.css";
-import { useState } from "react";
 
 export default function TopicSelector({ topics, onClick, isOpen, onToggle }) {
   return (

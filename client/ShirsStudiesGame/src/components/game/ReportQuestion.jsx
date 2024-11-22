@@ -18,7 +18,7 @@ export default function ReportQuestion({
   const handleSelectChange = (event) => {
     setReportQuestion((prev) => ({
       ...prev,
-      typeofReport: event.target.value,
+      typeOfReport: event.target.value,
     }));
   };
 
@@ -40,10 +40,10 @@ export default function ReportQuestion({
         <label htmlFor="report-type">בחר סיבת דיווח:</label>
         <select
           id="report-type"
-          value={reportQuestion.typeofReport}
+          value={reportQuestion.typeOfReport}
           onChange={handleSelectChange}
         >
-          <option value="" disabled selected>
+          <option value="" disabled>
             בחר את סיבת הדיווח
           </option>
           <option value="בעיה בשאלה">יש בעיה בשאלה - ניסוח/רלוונטיות</option>
