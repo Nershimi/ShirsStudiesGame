@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./client/ShirsStudiesGame # הנתיב לפרויקט ה-React
+      dockerfile: Dockerfile # קובץ Dockerfile מותאם
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client/ShirsStudiesGame:/app # שימוש ב-volume
+      - /app/node_modules # מונע בעיות עם node_modules
+
+    env_file:
+      - ./client/ShirsStudiesGame/.env # משתני סביבה ל-Frontend
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./functions # הנתיב לפרויקט ה-Node.js
+      dockerfile: Dockerfile # קובץ Dockerfile מותאם
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./functions:/app # שימוש ב-volume
+      - /app/node_modules
+    environment:
+      - NODE_ENV=production
