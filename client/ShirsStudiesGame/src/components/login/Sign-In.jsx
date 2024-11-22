@@ -9,7 +9,7 @@ import styles from "./AuthForm.module.css";
 
 import { loadLanguage } from "./../../helpers/loadLanguage.js"; // Import the helper function
 
-export default function SignIn({ lang = "en", setLoggedIn }) {
+export default function SignIn({ lang = "he", setLoggedIn }) {
   const [userFields, setUserFields] = useState({
     email: "",
     password: "",
