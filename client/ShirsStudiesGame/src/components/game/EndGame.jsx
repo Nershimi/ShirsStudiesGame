@@ -1,6 +1,8 @@
 import Button from "../Button.jsx";
 import AnswersSummary from "./AnswersSummary.jsx";
 import styles from "./EndGame.module.css";
+import { loadLanguage } from "./../../helpers/loadLanguage.js";
+import { useState, useEffect } from "react";
 
 export default function EndGame({
   correctAnswersCount,
@@ -8,10 +10,31 @@ export default function EndGame({
   handleCloseDialog,
   questionsAnsweredCorrect,
   handleReset,
+  lang = "he",
 }) {
+  const [texts, setTexts] = useState(null);
+
+  useEffect(() => {
+    loadLanguage(lang, "endGame")
+      .then((data) => {
+        // console.log("Language data loaded:", data);
+        setTexts(data.endGame);
+      })
+      .catch((error) => console.error("Error setting language data:", error));
+  }, [lang]);
+
+  if (!texts) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className={styles.dialog}>
-      <p>כל הכבוד הצלחת להגיע ל: {correctAnswersCount} תשובות נכונות.</p>
+      <p>
+        {" "}
+        {texts.numberOfSuccesses +
+          correctAnswersCount +
+          texts.correctAnswer}{" "}
+      </p>
       <AnswersSummary
         head="שגויות"
         collectedQuestion={QuestionsAnsweredWrong}
@@ -22,10 +45,10 @@ export default function EndGame({
       />
 
       <Button onClick={handleReset} className={styles.closeDialogButton}>
-        ResetGame
+        {texts.resetGame}
       </Button>
       <Button onClick={handleCloseDialog} className={styles.closeDialogButton}>
-        Close
+        {texts.close}
       </Button>
     </div>
   );

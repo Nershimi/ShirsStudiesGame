@@ -15,11 +15,13 @@ import "./index.css";
 import styles from "./App.module.css";
 import UserPersonalDetails from "./components/userPersonalDetails/UserPersonalDetails.jsx";
 
-// TODO: add personal details Module.
-// TODO: add personal progress Module.
-// TODO: option to add wrong questions to next section or a unique game
-// TODO: fix languages in All components.
-// TODO: add side bar (topic, progress, about, personal)
+// TODO: fix languages in All components - needs to add module to change lang.
+// TODO: add about the game and my self component.
+// TODO: add choose university to sign-in.
+// TODO: create Readme to github.
+// TODO: option to add wrong questions to next section or a unique game.
+// TODO: add section to show thw user progress.
+// TODO: find way for the user to upload question.
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);

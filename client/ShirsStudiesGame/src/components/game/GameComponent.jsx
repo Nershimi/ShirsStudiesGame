@@ -5,6 +5,7 @@ import EndGame from "./EndGame.jsx";
 import ReportQuestion from "./ReportQuestion.jsx";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import styles from "./GameComponent.module.css";
+import { loadLanguage } from "./../../helpers/loadLanguage.js";
 
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -16,7 +17,7 @@ const shuffleArray = (array) => {
 
 const GAME_LIMIT = 30;
 
-const QuestionGame = () => {
+const QuestionGame = ({ lang = "he" }) => {
   const [gameLimit, setGameLimit] = useState(GAME_LIMIT || 30);
   const location = useLocation();
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
@@ -35,6 +36,7 @@ const QuestionGame = () => {
   const [reporterQuestions, setReporterQuestions] = useState([]);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [texts, setTexts] = useState(null);
 
   const navigate = useNavigate();
 
@@ -53,6 +55,15 @@ const QuestionGame = () => {
     // Cleanup subscription on component unmount
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    loadLanguage(lang, "questionGame")
+      .then((data) => {
+        // console.log("Language data loaded:", data);
+        setTexts(data.questionGame);
+      })
+      .catch((error) => console.error("Error setting language data:", error));
+  }, [lang]);
 
   const reportOnQuestions = (userId) => {
     if (!userId) return; // Ensure userId is available
@@ -109,12 +120,12 @@ const QuestionGame = () => {
     if (!questionAnswered) {
       if (answer === shuffledQuestions[currentIndex].correctAnswer) {
         if (!correctAnswerSelected) {
-          setMessage("כל הכבוד, תשובה נכונה!");
+          setMessage(texts.goodJob);
           setCorrectAnswersCount((prev) => prev + 1);
           setCorrectAnswerSelected(true);
         }
       } else {
-        setMessage("תשובה לא נכונה, לא נורא תצליח בפעם הבאה");
+        setMessage(texts.nextTime);
       }
       setSelectedAnswer(answer);
       setQuestionAnswered(true); // Mark question as answered
@@ -189,7 +200,11 @@ const QuestionGame = () => {
     setAnswerCount(0);
   }
 
-  if (shuffledQuestions.length === 0) return <p>אין שאלות להציג</p>;
+  if (!texts) {
+    return <div>Loading...</div>;
+  }
+
+  if (shuffledQuestions.length === 0) return <p>{texts.nanQuestion}</p>;
 
   const currentQuestion = shuffledQuestions[currentIndex];
 
@@ -207,10 +222,10 @@ const QuestionGame = () => {
         ) : (
           <>
             <Button onClick={navigateToHomePage} className={styles.nextButton}>
-              מסך הבית
+              {texts.homePage}
             </Button>
             <h3>
-              שאלה {currentIndex + 1} מתוך {gameLimit}
+              {texts.question} {currentIndex + 1} {texts.from} {gameLimit}
             </h3>
             <h2>{currentQuestion.question}</h2>
             <div>
@@ -237,10 +252,10 @@ const QuestionGame = () => {
               className={styles.nextButton}
               disabled={!questionAnswered} // Disable button until question is answered
             >
-              המשך
+              {texts.continue}
             </Button>
             <Button className={styles.nextButton} onClick={handleReportClick}>
-              דווח על שאלה
+              {texts.report}
             </Button>
             {isReportModalOpen && (
               <ReportQuestion

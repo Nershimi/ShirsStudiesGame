@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import styles from "./userPersonalDetails.module.css";
 import Loader from "../loader/Loader.jsx";
+import { loadLanguage } from "./../../helpers/loadLanguage.js";
 
-export default function UserPersonalDetails({}) {
+export default function UserPersonalDetails({ lang = "he" }) {
   const [userDetails, setUserDetails] = useState({
     fullName: "",
     email: "",
@@ -12,6 +13,13 @@ export default function UserPersonalDetails({}) {
   });
   const [userId, setUserId] = useState("");
   const [isLoad, setIsLoad] = useState(false);
+  const [texts, setTexts] = useState(null);
+
+  useEffect(() => {
+    loadLanguage(lang, "userPersonal")
+      .then((data) => setTexts(data.userPersonal))
+      .catch((error) => console.error("Error setting language data:", error));
+  }, [lang]);
 
   useEffect(() => {
     const auth = getAuth();
@@ -43,7 +51,6 @@ export default function UserPersonalDetails({}) {
         );
         if (response.ok) {
           const data = await response.json();
-          //   console.log("API Response:", data);
           const convertFirebaseTimestamp = (timestamp) => {
             return new Date(
               timestamp._seconds * 1000 + timestamp._nanoseconds / 1000000
@@ -59,6 +66,7 @@ export default function UserPersonalDetails({}) {
             created: data.created
               ? convertFirebaseTimestamp(data.created)
               : null,
+            university: data.university.university,
           });
           setIsLoad(false);
         } else {
@@ -76,17 +84,26 @@ export default function UserPersonalDetails({}) {
     <div className={styles.centerWrapper}>
       {isLoad && <Loader />}
       <div className={styles.detailsContainer}>
-        <h2 className={styles.detailsHeader}>Personal Details</h2>
+        <h2 className={styles.detailsHeader}>
+          {texts ? texts.title : "Loading..."}
+        </h2>
         <div className={styles.detailsItem}>
-          <span className={styles.detailsLabel}>Name:</span>
+          <span className={styles.detailsLabel}>
+            {texts ? texts.fullName : "Loading..."}
+          </span>
           <span className={styles.detailsValue}>{userDetails.fullName}</span>
         </div>
         <div className={styles.detailsItem}>
-          <span className={styles.detailsLabel}>Email:</span>
+          <span className={styles.detailsLabel}>
+            {texts ? texts.email : "Loading..."}
+          </span>
           <span className={styles.detailsValue}>{userDetails.email}</span>
         </div>
         <div className={styles.detailsItem}>
-          <span className={styles.detailsLabel}> Date of Birth:</span>
+          <span className={styles.detailsLabel}>
+            {" "}
+            {texts ? texts.dateOfBirth : "Loading..."}
+          </span>
           <span className={styles.detailsValue}>
             {userDetails.dateOfBirth
               ? userDetails.dateOfBirth.toLocaleDateString()
@@ -94,7 +111,17 @@ export default function UserPersonalDetails({}) {
           </span>
         </div>
         <div className={styles.detailsItem}>
-          <span className={styles.detailsLabel}> created:</span>
+          <span className={styles.detailsLabel}>
+            {texts ? texts.university : "Loading..."}
+          </span>
+          <span className={styles.detailsValue}>
+            {userDetails.university ? userDetails.university : ""}
+          </span>
+        </div>
+        <div className={styles.detailsItem}>
+          <span className={styles.detailsLabel}>
+            {texts ? texts.created : "Loading..."}
+          </span>
           <span className={styles.detailsValue}>
             {userDetails.created
               ? userDetails.created.toLocaleDateString()

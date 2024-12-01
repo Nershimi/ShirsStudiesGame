@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import Loader from "../loader/Loader.jsx";
 import TopicSelector from "./TopicSelector.jsx";
-import { loadLanguage } from "./../../helpers/loadLanguage.js"; // Import the helper function
+import { loadLanguage } from "./../../helpers/loadLanguage.js"; 
 
 const HomePage = ({lang = "he"}) => {
   const navigate = useNavigate();

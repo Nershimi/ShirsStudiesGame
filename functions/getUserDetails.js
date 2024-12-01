@@ -27,7 +27,26 @@ exports.getUserDetails = functions.https.onRequest(async (req, res) => {
         return res.status(404).send("User ID not found");
       }
 
-      res.status(200).json(userDoc.data());
+      const userData = userDoc.data();
+      // Check if the "university" field is a Firestore reference
+      if (userData.university && userData.university.path) {
+        const universityRef = userData.university;
+
+        // Fetch the referenced document (optional)
+        const universityDoc = await universityRef.get();
+
+        if (universityDoc.exists) {
+          userData.university = {
+            id: universityDoc.id,
+            ...universityDoc.data(),
+          };
+        } else {
+          // If you just want the path as a string
+          userData.university = universityRef.path;
+        }
+      }
+
+      res.status(200).json(userData);
     } catch (error) {
       console.error("Error fetching user details: ", error);
       res.status(500).send("Error fetching users");

@@ -1,15 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button.jsx";
 import { isUserLogin } from "./../isUserLogin.js";
 import { signOutUser } from "./../signOutUser.js";
 import styles from "./Header.module.css";
 import Sidebar from "./sidebar/Sidebar.jsx";
+import { loadLanguage } from "../helpers/loadLanguage.js";
 
 const LOGO =
   "https://firebasestorage.googleapis.com/v0/b/shirsstudiesgame.appspot.com/o/shirsStudiesGame_updated.png?alt=media&token=1ff9959f-e111-4719-ab96-649cf0da6903";
 
-export default function Header({ loggedIn, setLoggedIn }) {
+export default function Header({ loggedIn, setLoggedIn, lang = "he" }) {
+  const [texts, setTexts] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,6 +26,12 @@ export default function Header({ loggedIn, setLoggedIn }) {
 
     checkUserLogin();
   }, [setLoggedIn]);
+
+  useEffect(() => {
+    loadLanguage(lang, "header")
+      .then((data) => setTexts(data.header))
+      .catch((error) => console.error("Error setting language data:", error));
+  }, [lang]);
 
   const navigateToSignUp = () => {
     navigate("/sign-up");
@@ -43,7 +51,9 @@ export default function Header({ loggedIn, setLoggedIn }) {
       <div className={styles.leftContent}>
         <Sidebar />
         <img src={LOGO} alt="App logo" />
-        <h1 className={styles.headerTitle}>Shirs Studies Game</h1>
+        <h1 className={styles.headerTitle}>
+          {texts ? texts.headerTitle : "Loading..."}
+        </h1>
       </div>
       <div className={styles.rightContent}>
         {!loggedIn ? (
@@ -54,7 +64,7 @@ export default function Header({ loggedIn, setLoggedIn }) {
               className={styles.button17}
               role="button"
             >
-              Sign up
+              {texts ? texts.signUp : "Loading..."}
             </Button>
             <Button
               type="button"
@@ -62,7 +72,7 @@ export default function Header({ loggedIn, setLoggedIn }) {
               className={styles.button17}
               role="button"
             >
-              Sign in
+              {texts ? texts.signIn : "Loading..."}
             </Button>
           </div>
         ) : (
@@ -73,7 +83,7 @@ export default function Header({ loggedIn, setLoggedIn }) {
               className={styles.button17}
               role="button"
             >
-              Sign out
+              {texts ? texts.signOut : "Loading..."}
             </Button>
           </div>
         )}

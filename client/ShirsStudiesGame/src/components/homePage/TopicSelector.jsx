@@ -1,6 +1,21 @@
 import styles from "./topicSelector.module.css";
+import { loadLanguage } from "./../../helpers/loadLanguage.js";
+import { useState, useEffect } from "react";
 
-export default function TopicSelector({ topics, onClick, isOpen, onToggle }) {
+export default function TopicSelector({
+  topics,
+  onClick,
+  isOpen,
+  onToggle,
+  lang = "he",
+}) {
+  const [texts, setTexts] = useState(null);
+  useEffect(() => {
+    loadLanguage(lang, "topicSelector")
+      .then((data) => setTexts(data.topicSelector))
+      .catch((error) => console.error("Error setting language data:", error));
+  }, [lang]);
+
   return (
     <div className={styles.topicContainer}>
       <div onClick={onToggle} className={styles.topicTitle}>
@@ -14,7 +29,7 @@ export default function TopicSelector({ topics, onClick, isOpen, onToggle }) {
           onClick={() => onClick(topics.title, null)}
           className={styles.subTopicItem}
         >
-          כל השאלות
+          {texts ? texts.allQuestions : "Loading..."}
         </li>
         {topics.subTopics.map((subTopic, index) => (
           <li

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { handleSignUp } from "./sign-up.js";
 import { isEmailValid } from "../../helpers/ValidateEmail.js";
 import {
@@ -9,8 +9,9 @@ import { useNavigate } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Button";
 import styles from "../login/AuthForm.module.css";
+import { loadLanguage } from "./../../helpers/loadLanguage.js";
 
-export default function SignUp() {
+export default function SignUp({ lang = "he" }) {
   const [newUser, setNewUser] = useState({
     email: "",
     password: "",
@@ -25,6 +26,7 @@ export default function SignUp() {
   const [error, setError] = useState("");
   const [hasInteractedFullName, setHasInteractedFullName] = useState(false);
   const [hasInteractedDate, setHasInteractedDate] = useState(false);
+  const [texts, setTexts] = useState(null);
   const navigate = useNavigate();
 
   const emailValid = isEmailValid(newUser.email);
@@ -33,6 +35,12 @@ export default function SignUp() {
     newUser.password,
     secondPassword
   );
+
+  useEffect(() => {
+    loadLanguage(lang, "signUp")
+      .then((data) => setTexts(data.signUp))
+      .catch((error) => console.error("Error setting language data:", error));
+  }, [lang]);
 
   const navigateToLogin = () => {
     navigate("/");
@@ -101,24 +109,24 @@ export default function SignUp() {
 
   return (
     <div className={styles.authFormContainer}>
-      <h1 className={styles.title}>Sign Up</h1>
+      <h1 className={styles.title}>{texts ? texts.title : "Loading..."}</h1>
       {error && (
-        <p className={styles.error}>{"לא ניתן ליצור משתמש, אנא נסה שנית"}</p>
+        <p className={styles.error}>{texts ? texts.error : "Loading..."}</p>
       )}
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.inputContainer}>
           <Input
             type="text"
             className={styles.input}
-            placeholder="Full Name"
+            placeholder={texts ? texts.fullName : "Loading..."}
             value={newUser.fullName}
             onChange={(e) => handleChange("fullName", e.target.value)}
             onBlur={() => setHasInteractedFullName(true)}
             hasInteracted={hasInteractedFullName}
             error={
-              hasInteractedFullName &&
-              newUser.fullName.length <= 0 &&
-              "Missing name"
+              hasInteractedFullName && newUser.fullName.length <= 0
+                ? texts?.errorName || "Loading..."
+                : null
             }
           />
         </div>
@@ -126,7 +134,7 @@ export default function SignUp() {
           <Input
             type="date"
             className={styles.input}
-            placeholder="Date of Birth"
+            placeholder={texts ? texts.dateOfBirth : "Loading..."}
             value={newUser.dateOfBirth}
             onChange={(e) => handleChange("dateOfBirth", e.target.value)}
             onBlur={() => setHasInteractedDate(true)}
@@ -138,7 +146,7 @@ export default function SignUp() {
           <Input
             type="email"
             className={styles.input}
-            placeholder="Email"
+            placeholder={texts ? texts.email : "Loading..."}
             value={newUser.email}
             onChange={(e) => handleChange("email", e.target.value)}
             error={
@@ -150,7 +158,7 @@ export default function SignUp() {
           <Input
             type={showPass.password ? "text" : "password"}
             className={styles.passwordInput}
-            placeholder="Password"
+            placeholder={texts ? texts.password : "Loading..."}
             value={newUser.password}
             onChange={(e) => handleChange("password", e.target.value)}
             error={
@@ -164,14 +172,16 @@ export default function SignUp() {
             className={styles.showButton}
             onClick={() => toggleShowPass("password")}
           >
-            {showPass.password ? "Hide" : "Show"}
+            {showPass
+              ? texts?.showButton?.hide || "Hide"
+              : texts?.showButton?.show || "Show"}
           </Button>
         </div>
         <div className={styles.inputContainer}>
           <Input
             type={showPass.confirmPassword ? "text" : "password"}
             className={styles.passwordInput}
-            placeholder="Confirm Password"
+            placeholder={texts ? texts.passwordAgain : "Loading..."}
             value={secondPassword}
             onChange={handleSecondPasswordChange}
             error={!isEqualPassword && "Password not match"}
@@ -181,11 +191,13 @@ export default function SignUp() {
             className={styles.showButton}
             onClick={() => toggleShowPass("confirmPassword")}
           >
-            {showPass.confirmPassword ? "Hide" : "Show"}
+            {showPass
+              ? texts?.showButton?.hide || "Hide"
+              : texts?.showButton?.show || "Show"}
           </Button>
         </div>
         <Button className={styles.button} type="submit">
-          Sign up
+          {texts ? texts.submit : "Loading..."}
         </Button>
       </form>
     </div>

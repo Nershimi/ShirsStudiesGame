@@ -11,6 +11,82 @@
       "hide": "הסתר"
     }
   },
+  "header": {
+    "headerTitle": "Shirs Studies Game",
+    "signUp": "הרשמה",
+    "signIn": "התחברות",
+    "signOut": "התנתקות"
+  },
+  "sideBar": {
+    "headerTitle": "Shirs Studies Game",
+    "letsPlay": "באו נתחיל לשחק",
+    "userDetails": "פרטים אישיים",
+    "about": "על המשחק ועצמי"
+  },
+  "topicSelector": {
+    "allQuestions": "כל השאלות"
+  },
+  "userPersonal": {
+    "title": "פרטים אישיים",
+    "fullName": "שם מלא",
+    "email": "אימייל",
+    "dateOfBirth": "תאריך לידה",
+    "university": "אוניברסיטה",
+    "created": "נוצר"
+  },
+  "answersSummary": {
+    "showAnswers": "הצג תשובות",
+    "hideAnswers": "הסתר תשובות",
+    "showDetails": "להלן פירוט התשובות ה",
+    "questionNum": "שאלה מס'",
+    "yourAnswer": "התשובה שלך היא:",
+    "correctAnswer": "התשובה הנכונה היא:"
+  },
+  "endGame": {
+    "numberOfSuccesses": "כל הכבוד הצלחת להגיע ל: ",
+    "correctAnswer": " תשובות נכונות.",
+    "resetGame": "משחק חדש",
+    "close": "סיום משחק"
+  },
+  "reportQuestion": {
+    "chooseReport": "בחר סיבת דיווח:",
+    "chooseReason": "בחר את סיבת הדיווח",
+    "problemInQuestion": "יש בעיה בשאלה - ניסוח/רלוונטיות",
+    "problemInAnswer": "יש בעיה בתשובות - תשובה לא נכונה/ניסוח",
+    "notRelevantQuestion": "שאלה לא רלוונטית לנושא",
+    "writeReason": "אנא פרט את הסיבה:",
+    "pleaseWrite": "אנא כתוב בפירוט מה הבעיה ומה נדרש לתקן",
+    "pleaseReport": "דווח על השאלה"
+  },
+  "questionGame": {
+    "goodJob": "כל הכבוד, תשובה נכונה!",
+    "nextTime": "תשובה לא נכונה, לא נורא תצליח בפעם הבאה",
+    "nanQuestion": "אין שאלות להציג",
+    "homePage": "מסך הבית",
+    "question": " שאלה",
+    "from": " מתוך",
+    "continue": "המשך",
+    "report": "דווח על שאלה"
+  },
+  "signUp": {
+    "title": "הרשמה",
+    "error": "לא ניתן ליצור משתמש, אנא נסה שנית",
+    "fullName": "שם מלא",
+    "errorName": "חסר שם מלא",
+    "dateOfBirth": "תאריך לידה",
+    "errorDate": "חסר תאריך",
+    "email": "אימייל",
+    "errorEmail": "המייל שגוי",
+    "password": "סיסמה",
+    "errorPass": "הסיסמה לא עומדת בתנאים",
+    "passwordAgain": "סיסמה חוזרת",
+    "errorPassSec": "סיסמה לא תואמת",
+    "showButton": {
+      "show": "הצג",
+      "hide": "הסתר"
+    },
+    "submit": "להרשמה"
+  },
   "homePage": {
     "title": "בחר נושא והתחל לשחק",
     "intro": "🎉 ברוכים הבאים למשחק הטריוויה שלנו! 🎉 איזה כיף שאתם כאן! זו ההזדמנות שלכם ללמוד, לאתגר את עצמכם ולהתנסות בדרך מהנה ומשתפת. 📚 איך זה עובד? ענו על שאלות, צברו נקודות, והפגינו את הידע שלכם. יש לכם שאלה טובה? מעולה! העלו אותה למשחק ותהיו חלק מהבנאים של הקהילה שלנו! ✨ כל משחק הוא צעד נוסף בדרך להצלחה! אז קדימה, בואו נכבוש יחד את האתגרים, נצחק, נלמד ונשתפר. 💡 טיפ קטן: אל תשכחו לבדוק שאלות חדשות שנוספו! בהצלחה ו... שחקו בכיף! 😄",
