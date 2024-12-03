@@ -1,15 +1,159 @@
 {
-    "signIn": {
-      "title": "Sign in",
-      "usernamePlaceholder": "Username",
-      "passwordPlaceholder": "Password",
-      "loginButton": "LOGIN",
-      "forgotPassword": "Forgot Password?",
-      "errorMessage": "Username or Password are not valid",
-      "showButton": {
-        "show": "Show",
-        "hide": "Hide"
-      }
+  "signIn": {
+    "title": "Welcome",
+    "usernamePlaceholder": "Username",
+    "passwordPlaceholder": "Password",
+    "loginButton": "Log In",
+    "forgotPassword": "Forgot Password?",
+    "errorMessage": "Invalid username or password",
+    "showButton": {
+      "show": "Show",
+      "hide": "Hide"
     }
+  },
+  "header": {
+    "headerTitle": "Shirs Studies Game",
+    "signUp": "Sign Up",
+    "signIn": "Log In",
+    "signOut": "Log Out"
+  },
+  "sideBar": {
+    "headerTitle": "Shirs Studies Game",
+    "letsPlay": "Let's Play",
+    "userDetails": "User Details",
+    "about": "About the Game and Me"
+  },
+  "topicSelector": {
+    "allQuestions": "All Questions"
+  },
+  "userPersonal": {
+    "title": "Personal Details",
+    "fullName": "Full Name",
+    "email": "Email",
+    "dateOfBirth": "Date of Birth",
+    "university": "University",
+    "created": "Created"
+  },
+  "answersSummary": {
+    "showAnswers": "Show Answers",
+    "hideAnswers": "Hide Answers",
+    "showDetails": "Here is a breakdown of your answers:",
+    "questionNum": "Question #",
+    "yourAnswer": "Your answer is:",
+    "correctAnswer": "The correct answer is:"
+  },
+  "endGame": {
+    "numberOfSuccesses": "Congratulations, you've reached:",
+    "correctAnswer": " correct answers.",
+    "resetGame": "New Game",
+    "close": "End Game"
+  },
+  "reportQuestion": {
+    "chooseReport": "Choose Report Reason:",
+    "chooseReason": "Select the report reason",
+    "problemInQuestion": "Issue with the question - wording/relevance",
+    "problemInAnswer": "Issue with the answers - incorrect answer/wording",
+    "notRelevantQuestion": "Question not relevant to the topic",
+    "writeReason": "Please explain the reason:",
+    "pleaseWrite": "Please detail the problem and suggest a fix",
+    "pleaseReport": "Report the Question"
+  },
+  "questionGame": {
+    "goodJob": "Great job, correct answer!",
+    "nextTime": "Incorrect answer, better luck next time",
+    "nanQuestion": "No questions to display",
+    "homePage": "Home Page",
+    "question": " Question",
+    "from": " of",
+    "continue": "Continue",
+    "report": "Report Question"
+  },
+  "signUp": {
+    "title": "Sign Up",
+    "error": "Unable to create user, please try again",
+    "fullName": "Full Name",
+    "errorName": "Full name is required",
+    "dateOfBirth": "Date of Birth",
+    "errorDate": "Date of birth is required",
+    "email": "Email",
+    "errorEmail": "Invalid email",
+    "password": "Password",
+    "errorPass": "Password does not meet criteria",
+    "passwordAgain": "Confirm Password",
+    "errorPassSec": "Passwords do not match",
+    "showButton": {
+      "show": "Show",
+      "hide": "Hide"
+    },
+    "submit": "Sign Up"
+  },
+  "homePage": {
+    "title": "Choose a Topic and Start Playing",
+    "intro": "🎉 Welcome to our trivia game! 🎉 We're glad you're here! This is your chance to learn, challenge yourself, and enjoy an engaging, interactive experience. 📚 How does it work? Answer questions, earn points, and showcase your knowledge. Have a great question? Awesome! Add it to the game and contribute to our growing community! ✨ Every game is a step closer to success! So, let's tackle challenges, laugh, learn, and improve together. 💡 Quick tip: Don't forget to check out new questions! Good luck and have fun! 😄",
+    "topics": [
+      {
+        "title": "נוירופיזיולוגיה ב",
+        "subTopics": [
+          "תנועות מוטוריות בסיסיות ושליטה מוטורית",
+          "רפלקסים ומנגנונים נוירופיזיולוגיים",
+          "מערכות שליטה בתנועה במוח",
+          "תנועות מורכבות ואינטגרציה בין מערכות",
+          "מנגנוני קואורדינציה ושילוב מידע חושי",
+          "מחלות והפרעות נוירולוגיות",
+          "נוירונים מוטוריים והשפעתם על תנועה"
+        ]
+      },
+      {
+        "title": "ביוכימיה 2",
+        "subTopics": [
+          "מבוא למטבוליזם",
+          "גליקוליזה",
+          "גלוקונאוגנזה ומסלול הפנטוזות",
+          "מעגל קרבס",
+          "זרחון חמצני-נשימה תאית",
+          "גליקוגן ועקרונות הבקרה המטבולית",
+          "פירוק שומנים",
+          "בניית שומנים",
+          "פירוק חלבונים",
+          "בקרה מטבולית"
+        ]
+      },
+      {
+        "title": "מבוא למיקרוביולוגיה",
+        "subTopics": []
+      },
+      {
+        "title": "אימונולוגיה",
+        "subTopics": [
+          "תאי מערכת החיסון",
+          "מנגנונים ותהליכים חיסוניים",
+          "מערכות חיסון",
+          "נוגדנים וציטוקינים",
+          "שיטות וכלים במעבדה",
+          "פתולוגיות והפרעות במערכת החיסון"
+        ]
+      },
+      {
+        "title": "ביולוגיה מולקולרית",
+        "subTopics": [
+          "שכפול ותיקון דנ״א",
+          "תרגום ועיבוד רנ״א",
+          "שחבור ועריכת רנ״א",
+          "מנגנוני שעתוק",
+          "השתקת רנ״א ופירוקו",
+          "כרומטין ואפיגנטיקה",
+          "רגולציה של ביטוי גנים"
+        ]
+      },
+      {
+        "title": "פזיולוגיה ב",
+        "subTopics": [
+          "מערכת קרדיווסקולרית",
+          "מערכת העיכול",
+          "מערכת הנשימה",
+          "מערכת הכליות והשתן"
+        ]
+      }
+    ]
   }
-  
+}

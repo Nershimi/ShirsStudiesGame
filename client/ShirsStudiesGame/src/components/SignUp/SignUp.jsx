@@ -172,7 +172,7 @@ export default function SignUp({ lang = "he" }) {
             className={styles.showButton}
             onClick={() => toggleShowPass("password")}
           >
-            {showPass
+            {showPass.password
               ? texts?.showButton?.hide || "Hide"
               : texts?.showButton?.show || "Show"}
           </Button>
@@ -191,7 +191,7 @@ export default function SignUp({ lang = "he" }) {
             className={styles.showButton}
             onClick={() => toggleShowPass("confirmPassword")}
           >
-            {showPass
+            {showPass.confirmPassword
               ? texts?.showButton?.hide || "Hide"
               : texts?.showButton?.show || "Show"}
           </Button>

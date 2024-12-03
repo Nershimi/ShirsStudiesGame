@@ -17,7 +17,7 @@ const shuffleArray = (array) => {
 
 const GAME_LIMIT = 30;
 
-const QuestionGame = ({ lang = "he" }) => {
+const QuestionGame = ({ lang }) => {
   const [gameLimit, setGameLimit] = useState(GAME_LIMIT || 30);
   const location = useLocation();
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
@@ -218,6 +218,7 @@ const QuestionGame = ({ lang = "he" }) => {
             questionsAnsweredCorrect={questionsAnsweredCorrect}
             QuestionsAnsweredWrong={questionsAnsweredWrong}
             handleReset={handleReset}
+            lang={lang}
           />
         ) : (
           <>
@@ -262,6 +263,7 @@ const QuestionGame = ({ lang = "he" }) => {
                 question={currentQuestion}
                 setReporterQuestions={setReporterQuestions}
                 onClose={handleCloseModal}
+                lang={lang}
               />
             )}
           </>

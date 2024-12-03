@@ -4,7 +4,7 @@ import styles from "./userPersonalDetails.module.css";
 import Loader from "../loader/Loader.jsx";
 import { loadLanguage } from "./../../helpers/loadLanguage.js";
 
-export default function UserPersonalDetails({ lang = "he" }) {
+export default function UserPersonalDetails({ lang }) {
   const [userDetails, setUserDetails] = useState({
     fullName: "",
     email: "",

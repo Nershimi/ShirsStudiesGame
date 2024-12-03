@@ -5,7 +5,7 @@ import { loadLanguage } from "./../../helpers/loadLanguage.js";
 export default function AnswersSummary({
   head,
   collectedQuestion,
-  lang = "he",
+  lang,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [texts, setTexts] = useState(null);

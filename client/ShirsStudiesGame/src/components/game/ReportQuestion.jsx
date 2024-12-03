@@ -8,7 +8,7 @@ export default function ReportQuestion({
   question,
   setReporterQuestions,
   onClose,
-  lang = "he",
+  lang,
 }) {
   const [reportQuestion, setReportQuestion] = useState({
     questionId: question.id,

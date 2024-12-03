@@ -14,6 +14,9 @@ import QuestionGame from "./components/game/GameComponent.jsx";
 import "./index.css";
 import styles from "./App.module.css";
 import UserPersonalDetails from "./components/userPersonalDetails/UserPersonalDetails.jsx";
+import { useTranslation } from "react-i18next";
+import "././components/languages/i18n.js"; // Ensure i18n is initialized
+import LanguageSwitcher from "./components/switcherLang/LanguageSwitcher.jsx"; // Language switcher component
 
 // TODO: fix languages in All components - needs to add module to change lang.
 // TODO: add about the game and my self component.
@@ -25,6 +28,8 @@ import UserPersonalDetails from "./components/userPersonalDetails/UserPersonalDe
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const { i18n } = useTranslation();
+  const [lang, setLang] = useState(i18n.language || "he");
 
   useEffect(() => {
     const checkUserLogin = async () => {
@@ -39,14 +44,20 @@ function App() {
     checkUserLogin();
   }, []);
 
+  const handleLanguageChange = (language) => {
+    i18n.changeLanguage(language);
+    setLang(language);
+  };
+
   return (
     <Router>
       <div className={styles.appContainer}>
-        <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        <Header lang={lang} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        <LanguageSwitcher />
         <Routes>
           <Route
             path="/HomePage"
-            element={loggedIn ? <HomePage /> : <Navigate to="/" />}
+            element={loggedIn ? <HomePage lang={lang} /> : <Navigate to="/" />}
           />
           <Route
             path="/"
@@ -54,13 +65,16 @@ function App() {
               loggedIn ? (
                 <Navigate to="/HomePage" />
               ) : (
-                <SignIn setLoggedIn={setLoggedIn} />
+                <SignIn lang={lang} setLoggedIn={setLoggedIn} />
               )
             }
           />
-          <Route path="sign-up" element={<SignUp />} />
-          <Route path="/game" element={<QuestionGame />} />
-          <Route path="/userDetails" element={<UserPersonalDetails />} />
+          <Route path="sign-up" element={<SignUp lang={lang} />} />
+          <Route path="/game" element={<QuestionGame lang={lang} />} />
+          <Route
+            path="/userDetails"
+            element={<UserPersonalDetails lang={lang} />}
+          />
         </Routes>
       </div>
     </Router>

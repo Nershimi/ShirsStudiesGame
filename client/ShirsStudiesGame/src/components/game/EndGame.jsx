@@ -10,7 +10,7 @@ export default function EndGame({
   handleCloseDialog,
   questionsAnsweredCorrect,
   handleReset,
-  lang = "he",
+  lang,
 }) {
   const [texts, setTexts] = useState(null);
 
@@ -38,10 +38,12 @@ export default function EndGame({
       <AnswersSummary
         head="שגויות"
         collectedQuestion={QuestionsAnsweredWrong}
+        lang={lang}
       />
       <AnswersSummary
         head="נכונות"
         collectedQuestion={questionsAnsweredCorrect}
+        lang={lang}
       />
 
       <Button onClick={handleReset} className={styles.closeDialogButton}>

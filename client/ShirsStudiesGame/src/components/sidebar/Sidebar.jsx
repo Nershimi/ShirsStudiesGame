@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import styles from "./Sidebar.module.css";
 import { loadLanguage } from "./../../helpers/loadLanguage.js";
 
-export default function Sidebar({ lang = "he" }) {
+export default function Sidebar({ lang }) {
   const [isOpen, setIsOpen] = useState(false);
   const [texts, setTexts] = useState(null);
 

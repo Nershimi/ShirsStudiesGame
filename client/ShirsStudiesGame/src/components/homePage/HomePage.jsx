@@ -5,7 +5,7 @@ import Loader from "../loader/Loader.jsx";
 import TopicSelector from "./TopicSelector.jsx";
 import { loadLanguage } from "./../../helpers/loadLanguage.js"; 
 
-const HomePage = ({lang = "he"}) => {
+const HomePage = ({lang}) => {
   const navigate = useNavigate();
   const [isLoad, setIsLoad] = useState(false);
   const [openTopicIndex, setOpenTopicIndex] = useState(null);
