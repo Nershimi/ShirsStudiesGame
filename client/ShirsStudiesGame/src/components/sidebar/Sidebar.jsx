@@ -17,7 +17,6 @@ export default function Sidebar({ lang }) {
   useEffect(() => {
     loadLanguage(lang, "sideBar")
       .then((data) => {
-        // console.log("Language data loaded:", data);
         setTexts(data.sideBar);
       })
       .catch((error) => console.error("Error setting language data:", error));

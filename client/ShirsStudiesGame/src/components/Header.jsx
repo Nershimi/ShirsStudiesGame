@@ -5,6 +5,7 @@ import { isUserLogin } from "./../isUserLogin.js";
 import { signOutUser } from "./../signOutUser.js";
 import styles from "./Header.module.css";
 import Sidebar from "./sidebar/Sidebar.jsx";
+import { loadLanguage } from "../helpers/loadLanguage.js";
 
 const LOGO =
   "https://firebasestorage.googleapis.com/v0/b/shirsstudiesgame.appspot.com/o/shirsStudiesGame_updated.png?alt=media&token=1ff9959f-e111-4719-ab96-649cf0da6903";
@@ -27,8 +28,10 @@ export default function Header({ loggedIn, setLoggedIn, lang }) {
   }, [setLoggedIn]);
 
   useEffect(() => {
-    import(`./languages/${lang}.json`)
-      .then((data) => setTexts(data.header))
+    loadLanguage(lang, "header")
+      .then((data) => {
+        setTexts(data.header);
+      })
       .catch((error) => console.error("Error setting language data:", error));
   }, [lang]);
 

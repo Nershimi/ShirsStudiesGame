@@ -18,7 +18,6 @@ import { useTranslation } from "react-i18next";
 import "././components/languages/i18n.js"; // Ensure i18n is initialized
 import LanguageSwitcher from "./components/switcherLang/LanguageSwitcher.jsx"; // Language switcher component
 
-// TODO: fix languages in All components - needs to add module to change lang.
 // TODO: add about the game and my self component.
 // TODO: add choose university to sign-in.
 // TODO: create Readme to github.
