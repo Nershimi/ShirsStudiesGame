@@ -22,7 +22,7 @@ To get started with the project, follow the steps below:
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/Nershimi/ShirsStudiesGame.git
-   cd shirs-studies-game
+   cd shirsStudiesGame/client/ShirsStudiesGame
    ```
 2. **Install Dependencies**
    ```bash
