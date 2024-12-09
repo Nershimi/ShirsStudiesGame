@@ -89,7 +89,6 @@
   },
   "homePage": {
     "title": "Choose a Topic and Start Playing",
-    "intro": "🎉 Welcome to our trivia game! 🎉 We're glad you're here! This is your chance to learn, challenge yourself, and enjoy an engaging, interactive experience. 📚 How does it work? Answer questions, earn points, and showcase your knowledge. Have a great question? Awesome! Add it to the game and contribute to our growing community! ✨ Every game is a step closer to success! So, let's tackle challenges, laugh, learn, and improve together. 💡 Quick tip: Don't forget to check out new questions! Good luck and have fun! 😄",
     "topics": [
       {
         "title": "נוירופיזיולוגיה ב",
@@ -155,5 +154,9 @@
         ]
       }
     ]
+  },
+  "aboutMe": {
+    "intro": "🎉 Welcome to our trivia game! 🎉 We're glad you're here! This is your chance to learn, challenge yourself, and enjoy an engaging, interactive experience. 📚 How does it work? Answer questions, earn points, and showcase your knowledge. Have a great question? Awesome! Add it to the game and contribute to our growing community! ✨ Every game is a step closer to success! So, let's tackle challenges, laugh, learn, and improve together. 💡 Quick tip: Don't forget to check out new questions! Good luck and have fun! 😄",
+    "aboutme": "Hello,\n\nMy name is Ner Shammai, and I am a Full-Stack developer specializing in React (Vite) and Node.js technologies. With over three years of experience in developing web applications, I bring strong technical skills and a constant drive for innovation in the development field.\n\nIn addition to my private work, I am a member of a reserve team in PAKAR, where we engage in developing advanced automations supporting the unit's activities. My goal is to create technological systems that help solve problems in both civilian and military areas, emphasizing efficiency and reliability.\n\nAs part of my work with the team, we established a unique collaboration system between volunteers of the \"Friends of Naftali\" association in the Home Front Command. The system allows access to up-to-date information on emergency events in the urban area, which assists in coordinating actions and dealing with emergency situations optimally.\n\nI am always looking for new challenges and opportunities to expand my knowledge and skills, while making a significant contribution to the projects that interest me and the teams I work with."
   }
 }

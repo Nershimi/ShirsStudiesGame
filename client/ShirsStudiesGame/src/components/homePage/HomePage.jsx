@@ -66,7 +66,6 @@ const HomePage = ({lang}) => {
     <div>
       <div className={styles.pageContainer}>
         {isLoad && <Loader />}
-        <p>{texts.intro}</p>
         <h1 className={styles.title}>{texts.title}</h1>
         <div className={styles.gameButtonContainer}>
           {texts.topics.map((topic, index) => (

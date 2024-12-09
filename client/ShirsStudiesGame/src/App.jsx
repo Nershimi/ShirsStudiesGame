@@ -17,9 +17,9 @@ import UserPersonalDetails from "./components/userPersonalDetails/UserPersonalDe
 import { useTranslation } from "react-i18next";
 import "././components/languages/i18n.js"; // Ensure i18n is initialized
 import LanguageSwitcher from "./components/switcherLang/LanguageSwitcher.jsx"; // Language switcher component
+import AboutMe from "./components/aboutMe/AboutMe.jsx";
 
-// TODO: add about the game and my self component.
-// TODO: add choose university to sign-in.
+// TODO: add choose university to sign-up. - and change the select component
 // TODO: create Readme to github.
 // TODO: option to add wrong questions to next section or a unique game.
 // TODO: add section to show thw user progress.
@@ -70,6 +70,7 @@ function App() {
           />
           <Route path="sign-up" element={<SignUp lang={lang} />} />
           <Route path="/game" element={<QuestionGame lang={lang} />} />
+          <Route path="/aboutMe" element={<AboutMe lang={lang} />} />
           <Route
             path="/userDetails"
             element={<UserPersonalDetails lang={lang} />}
