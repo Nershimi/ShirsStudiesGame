@@ -51,16 +51,28 @@
   "reportQuestion": {
     "chooseReport": "Choose Report Reason:",
     "chooseReason": "Select the report reason",
-    "problemInQuestion": "Issue with the question - wording/relevance",
-    "problemInAnswer": "Issue with the answers - incorrect answer/wording",
-    "notRelevantQuestion": "Question not relevant to the topic",
     "writeReason": "Please explain the reason:",
     "pleaseWrite": "Please detail the problem and suggest a fix",
-    "pleaseReport": "Report the Question"
+    "pleaseReport": "Report the Question",
+    "options": [
+      {
+        "value": "There is a problem with the question - wording/relevance",
+        "label": "There is a problem with the question - wording/relevance"
+      },
+      {
+        "value": "There is a problem with the answers - incorrect answer/wording",
+        "label": "There is a problem with the answers - incorrect answer/wording"
+      },
+      {
+        "value": "Question is not relevant to the topic",
+        "label": "Question is not relevant to the topic"
+      }
+    ]
   },
   "questionGame": {
     "goodJob": "Great job, correct answer!",
     "nextTime": "Incorrect answer, better luck next time",
+    "theCorrectAnswer": "The correct answer is: ",
     "nanQuestion": "No questions to display",
     "homePage": "Home Page",
     "question": " Question",
@@ -85,6 +97,7 @@
       "show": "Show",
       "hide": "Hide"
     },
+    "chooseUni": "Please choose university or create one",
     "submit": "Sign Up"
   },
   "homePage": {
@@ -151,6 +164,80 @@
           "מערכת העיכול",
           "מערכת הנשימה",
           "מערכת הכליות והשתן"
+        ]
+      },
+      {
+        "title": "פרמקולוגיה",
+        "subTopics": [
+          "אצטילכולין",
+          "גאבא",
+          "גלוטמט",
+          "דופמין",
+          "נוראדרנלין",
+          "סרטונין",
+          "היסטמין"
+        ]
+      },
+      {
+        "title": "תהליכים קוגנטיבים",
+        "subTopics": ["תפיסה", "למידה וזיכרון", "שפה ולטרליזציה"]
+      },
+      {
+        "title": "מיקרוסקופיה",
+        "subTopics": []
+      },
+      {
+        "title": "מנגנונים של מעבר אותות",
+        "subTopics": [
+          "מבוא",
+          "איקוסנואידים",
+          "מונואמינים",
+          "אצטילכולין",
+          "גלוטמט וגאבא",
+          "אופיאואידים וקנבינואידים",
+          "היסטמין",
+          "מעבר אותות דלקתי",
+          "רצפטורים מזהי דפוסים והפעלת מערכת חיסונית מולדת",
+          "מוות תאי מתוכנן",
+          "מסלולי איתות סרטניים"
+        ]
+      },
+      {
+        "title": "ביולוגיה התפתחותית",
+        "subTopics": [
+          "מבוא",
+          "הפריית הביצית",
+          "השליה",
+          "שכבות נבט",
+          "התפתחות מערכות הגוף",
+          "טרטולוגיה",
+          "פתולוגיות בעובר"
+        ]
+      },
+      {
+        "title": "ווירולוגיה",
+        "subTopics": [
+          "מבוא",
+          "שלבים בהבדקה ויראלית",
+          "בקטריופאג׳ים",
+          "שפעת",
+          "וירוסי הרפס",
+          "אונקוווירוסים",
+          "אינטרקציות וירוס מאחסן",
+          "הליקובקטור פילורי"
+        ]
+      },
+      {
+        "title": "בקרה עצבית של התנהגות",
+        "subTopics": [
+          "תשומת לב ותודעה",
+          "התנהגות מינית ורביה",
+          "תגמול הנאה והתמכרות",
+          "מחזור שינה ערות",
+          "רגשות",
+          "קוגניציה חברתית",
+          "התנהגות חברתית ואמפתיה",
+          "אינטרקציה חברתית"
         ]
       }
     ]

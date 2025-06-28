@@ -35,6 +35,7 @@ exports.reportAboutQuestions = functions.https.onRequest(async (req, res) => {
           typeOfReport,
           details,
           userRef,
+          created: admin.firestore.FieldValue.serverTimestamp(),
         });
       });
 

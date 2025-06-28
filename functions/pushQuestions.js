@@ -23,7 +23,8 @@ exports.pushQuestion = functions.https.onRequest((req, res) => {
 
       const batch = db.batch();
 
-      questions.forEach((question) => {
+      // Create or get topic reference
+      for (const question of questions) {
         const {
           question: questionText,
           correctAnswer,
@@ -32,18 +33,41 @@ exports.pushQuestion = functions.https.onRequest((req, res) => {
           topic,
           subtopic,
         } = question;
-        const docRef = db.collection("questions").doc(); // Auto-generate ID
 
-        batch.set(docRef, {
+        // Check if the topic exists in the 'courses' collection
+        const topicSnapshot = await db
+          .collection('courses')
+          .where('course', '==', topic)
+          .get();
+
+        let topicDocRef;
+
+        // If the topic doesn't exist, create it
+        if (topicSnapshot.empty) {
+          const newTopicRef = db.collection("courses").doc();
+          await newTopicRef.set({
+            course: topic,
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+          });
+          topicDocRef = newTopicRef;
+        } else {
+          topicDocRef = topicSnapshot.docs[0].ref; // Get the first matching document's reference
+        }
+
+        // Now create the question with a reference to the topic
+        const questionDocRef = db.collection("questions").doc(); // Auto-generate ID
+
+        batch.set(questionDocRef, {
           question: questionText,
           correctAnswer,
           wrongAnswers,
           level,
-          topic,
+          topic: topicDocRef, // Reference to topic
           subtopic,
         });
-      });
+      }
 
+      // Commit all batch operations
       await batch.commit();
 
       res.status(200).send(`${questions.length} Questions saved successfully.`);

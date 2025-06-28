@@ -110,6 +110,12 @@
   margin-bottom: 1rem;
 }
 
+.select {
+  color: black;
+  border-color: #ccc;
+  width: 90%;
+}
+
 /* Media Queries */
 @media (max-width: 600px) {
   .authFormContainer {

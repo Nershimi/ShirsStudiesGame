@@ -6,6 +6,7 @@ const { getUserDetails } = require("./getUserDetails");
 const { updateSubtopicQuestions } = require("./updateSubtopicQuestions");
 const { deleteDocumentsBySubtopic } = require("./deleteSubtopicDoc");
 const { updateTopicReferences } = require("./updateTopicReferences");
+const { deletePharmacologyCourses } = require("./deletePharmacologyCourses");
 
 module.exports = {
   saveUserPersonalDetails,
@@ -16,4 +17,5 @@ module.exports = {
   updateSubtopicQuestions,
   deleteDocumentsBySubtopic,
   updateTopicReferences,
+  deletePharmacologyCourses
 };

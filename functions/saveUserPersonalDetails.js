@@ -22,11 +22,22 @@ exports.saveUserPersonalDetails = functions.https.onRequest(
           !userDetails.email ||
           !userDetails.dateOfBirth ||
           !userDetails.fullName ||
-          !userDetails.userId
+          !userDetails.userId ||
+          !userDetails.selectedUniversity
         ) {
           res.status(400).send("Missing user details");
           return;
         }
+        const universitiesRef = db.collection("Universities");
+        const snapshot = await universitiesRef
+          .where("university", "==", userDetails.selectedUniversity.label)
+          .get();
+
+        if (snapshot.empty) {
+          res.status(404).send("University not found");
+          return;
+        }
+        const docRef = snapshot.docs[0].ref;
 
         const dateOfBirth = admin.firestore.Timestamp.fromDate(
           new Date(userDetails.dateOfBirth)
@@ -37,6 +48,7 @@ exports.saveUserPersonalDetails = functions.https.onRequest(
           dateOfBirth: dateOfBirth,
           fullName: userDetails.fullName,
           created: admin.firestore.FieldValue.serverTimestamp(),
+          universityRef: docRef,
         });
 
         res.status(200).send("User's details saved successfully");

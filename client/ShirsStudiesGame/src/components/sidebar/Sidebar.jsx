@@ -48,7 +48,9 @@ export default function Sidebar({ lang }) {
             </Link>
           </li>
           <li>
-            <Link to="/aboutMe">{texts ? texts.about : "Loading..."}</Link>
+            <Link onClick={toggleMenu} to="/aboutMe">
+              {texts ? texts.about : "Loading..."}
+            </Link>
           </li>
         </ul>
       </nav>

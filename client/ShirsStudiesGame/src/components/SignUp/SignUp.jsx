@@ -9,7 +9,10 @@ import { useNavigate } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Button";
 import styles from "../login/AuthForm.module.css";
+import getUniversities from "../../helpers/getsAllUniDocs.js";
+import addUniversityToFirestore from "../../helpers/addUniversityToFirestore.js";
 import { loadLanguage } from "./../../helpers/loadLanguage.js";
+import Select from "react-select/creatable";
 
 export default function SignUp({ lang = "he" }) {
   const [newUser, setNewUser] = useState({
@@ -27,6 +30,8 @@ export default function SignUp({ lang = "he" }) {
   const [hasInteractedFullName, setHasInteractedFullName] = useState(false);
   const [hasInteractedDate, setHasInteractedDate] = useState(false);
   const [texts, setTexts] = useState(null);
+  const [universities, setUniversities] = useState([]);
+  const [selectedUniversity, setSelectedUniversity] = useState(null);
   const navigate = useNavigate();
 
   const emailValid = isEmailValid(newUser.email);
@@ -46,6 +51,21 @@ export default function SignUp({ lang = "he" }) {
     navigate("/");
   };
 
+  useEffect(() => {
+    const fetchUniversities = async () => {
+      const uniList = await getUniversities();
+      const formattedUniversities = uniList.map((uni) => ({
+        label: uni.university,
+        value: uni.id,
+      }));
+      setUniversities(formattedUniversities);
+    };
+    fetchUniversities();
+  }, []);
+
+  // TODO: send the new university with the body => Done
+  // TODO: change the cloud function to get university as a ref. =>
+  // TODO: check on the personal user
   async function saveUserDetails(userId) {
     try {
       const response = await fetch(
@@ -55,7 +75,7 @@ export default function SignUp({ lang = "he" }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ...newUser, userId }),
+          body: JSON.stringify({ ...newUser, userId, selectedUniversity }),
         }
       );
       if (response.ok) {
@@ -93,6 +113,7 @@ export default function SignUp({ lang = "he" }) {
     setError("");
     try {
       const user = await handleSignUp(newUser, setError); // Pass setError here
+      addUniversityToFirestore(selectedUniversity);
       await saveUserDetails(user.uid);
       navigate("/");
     } catch (error) {
@@ -196,6 +217,16 @@ export default function SignUp({ lang = "he" }) {
               : texts?.showButton?.show || "Show"}
           </Button>
         </div>
+        <p>{texts ? texts.chooseUni : "Loading..."}</p>
+        <Select
+          isClearable
+          isSearchable
+          options={universities}
+          onChange={(selectedOption) => {
+            setSelectedUniversity(selectedOption);
+          }}
+          className={styles.select}
+        ></Select>
         <Button className={styles.button} type="submit">
           {texts ? texts.submit : "Loading..."}
         </Button>

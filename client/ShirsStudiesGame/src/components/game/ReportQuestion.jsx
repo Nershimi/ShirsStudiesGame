@@ -3,6 +3,7 @@ import Button from "../Button.jsx";
 import CloseButton from "../CloseButton.jsx";
 import styles from "./ReportQuestion.module.css";
 import { loadLanguage } from "./../../helpers/loadLanguage.js";
+import Select from "react-select";
 
 export default function ReportQuestion({
   question,
@@ -18,10 +19,10 @@ export default function ReportQuestion({
   });
   const [texts, setTexts] = useState(null);
 
-  const handleSelectChange = (event) => {
+  const handleSelectChange = (selectedOption) => {
     setReportQuestion((prev) => ({
       ...prev,
-      typeOfReport: event.target.value,
+      typeOfReport: selectedOption ? selectedOption.value : "",
     }));
   };
 
@@ -54,18 +55,12 @@ export default function ReportQuestion({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <label htmlFor="report-type">{texts.chooseReport}</label>
-        <select
-          id="report-type"
-          value={reportQuestion.typeOfReport}
+        <Select
+          options={texts.options}
           onChange={handleSelectChange}
-        >
-          <option value="" disabled>
-            {texts.chooseReason || "בחר את סיבת הדיווח"}
-          </option>
-          <option value="בעיה בשאלה">{texts.problemInQuestion}</option>
-          <option value="בעיה בתשובה">{texts.problemInAnswer}</option>
-          <option value="שאלה לא רלוונטית">{texts.notRelevantQuestion}</option>
-        </select>
+          aria-labelledby="report-type"
+        />
+
         <div>
           <label htmlFor="report-details">{texts.writeReason}</label>
           <textarea

@@ -19,10 +19,8 @@ import "././components/languages/i18n.js"; // Ensure i18n is initialized
 import LanguageSwitcher from "./components/switcherLang/LanguageSwitcher.jsx"; // Language switcher component
 import AboutMe from "./components/aboutMe/AboutMe.jsx";
 
-// TODO: add choose university to sign-up. - and change the select component
-// TODO: create Readme to github.
 // TODO: option to add wrong questions to next section or a unique game.
-// TODO: add section to show thw user progress.
+// TODO: add section to show the user progress.
 // TODO: find way for the user to upload question.
 
 function App() {

@@ -125,7 +125,9 @@ const QuestionGame = ({ lang }) => {
           setCorrectAnswerSelected(true);
         }
       } else {
-        setMessage(texts.nextTime);
+        setMessage(
+          `${texts.theCorrectAnswer} ${shuffledQuestions[currentIndex].correctAnswer}\n${texts.nextTime}`
+        );
       }
       setSelectedAnswer(answer);
       setQuestionAnswered(true); // Mark question as answered
